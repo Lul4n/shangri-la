@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"out/**/*.js": true,
+			"out/**/*.js.map": true
+		},
+		"debug.terminal.clearBeforeReusing": true,
+		"terminal.integrated.scrollback": 100000
+	}
+}

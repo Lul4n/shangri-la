@@ -1,0 +1,14 @@
+import { DefenseType } from "./DefenseType";
+import { Hull } from "./Hull";
+import { SimpleDestroyable } from "./SimpleDestroyable";
+
+export class SimpleHull extends SimpleDestroyable implements Hull {
+
+    constructor(hp: number, defenseType: DefenseType) {
+        super(hp, defenseType);
+    }
+
+    public toString(): string {
+        return `SimpleHull{hp:${this.getHp()}/${this.getMaxHp()},type:${this.getDefenseType()}}`;
+    }
+}
