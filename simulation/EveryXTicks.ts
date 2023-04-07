@@ -4,27 +4,27 @@ import { Ticks } from './Ticks';
 
 export class EveryXTicks implements Simulatable{
 
-    private readonly x : Ticks;
-    private ticks : Ticks;
-    private readonly callback : () => void
+    private readonly _x : Ticks;
+    private _ticks : Ticks;
+    private readonly _callback : () => void
 
-    constructor(x:Ticks, callback : () => void){
+    constructor(x : Ticks, callback : () => void){
         assert(x > 0);
-        this.x = x;
-        this.ticks = 0n;
-        this.callback = callback;
+        this._x = x;
+        this._ticks = 0n;
+        this._callback = callback;
     }
-    public getX(): bigint{
-        return this.x;
+    public get x(): bigint{
+        return this._x;
     }
 
     public update(deltaTime : Ticks){
         assert(deltaTime >= 0n);
-        this.ticks += deltaTime;
-        const timesX = this.ticks / this.x;
-        this.ticks -= timesX * this.x;
+        this._ticks += deltaTime;
+        const timesX = this._ticks / this._x;
+        this._ticks -= timesX * this._x;
         for(let time = 0; time < timesX; time++){
-            this.callback();
+            this._callback();
         }
     }
 }

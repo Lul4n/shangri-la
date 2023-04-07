@@ -11,43 +11,43 @@ import { EveryXTicks } from "../simulation/EveryXTicks";
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 
 export class Battle implements Simulatable{
-    private readonly everyXTicks : EveryXTicks;
-    private readonly attacker : Fleet;
-    private readonly defender : Fleet;
-    private readonly maxRounds : bigint;
-    private round : bigint = 0n;
-    private result : BattleResult;
+    private readonly _everyXTicks : EveryXTicks;
+    private readonly _attacker : Fleet;
+    private readonly _defender : Fleet;
+    private readonly _maxRounds : bigint;
+    private _round : bigint = 0n;
+    private _result : BattleResult;
 
     constructor(attacker: Fleet, defender: Fleet, maxRounds: bigint){
-        this.everyXTicks = new EveryXTicks(10n, () => this.calculateRound());
-        this.round = 0n;
-        this.attacker = attacker;
-        this.defender = defender;
-        this.maxRounds = maxRounds;
-        this.result = 'OPEN';
+        this._everyXTicks = new EveryXTicks(10n, () => this.calculateRound());
+        this._attacker = attacker;
+        this._defender = defender;
+        this._maxRounds = maxRounds;
+        this._round = 0n;
+        this._result = 'OPEN';
     }
 
     public update(deltaTime : Ticks){
-        if(this.result !== 'OPEN'){
+        if(this._result !== 'OPEN'){
             return;
         }
-        this.everyXTicks.update(deltaTime);
+        this._everyXTicks.update(deltaTime);
     }
 
     private determineParticipantOrder() : [Fleet, Fleet]{
         if (Utils.randomBoolean()) {
-            return [this.attacker, this.defender];
+            return [this._attacker, this._defender];
         } else {
-            return [this.defender, this.attacker];
+            return [this._defender, this._attacker];
         }
     }
 
     private calculateRound(){
-        if(this.result !== 'OPEN'){
+        if(this._result !== 'OPEN'){
             return;
         }
-        this.round++;
-        LOGGER.info(`Round ${this.round}: ${this.attacker} vs. ${this.defender}`);
+        this._round++;
+        LOGGER.info(`Round ${this._round}: ${this._attacker} vs. ${this._defender}`);
 
         const ordered = this.determineParticipantOrder();
         ordered[0].attack(ordered[1]);
@@ -55,16 +55,16 @@ export class Battle implements Simulatable{
             ordered[1].attack(ordered[0]);
         }
         
-        if(this.attacker.isEmpty() && this.defender.isEmpty()){
-            this.result = 'DRAW';
-        }else if (this.attacker.isEmpty()) {
-            this.result = 'DEFENDER_WON';
-        } else if (this.defender.isEmpty()) {
-            this.result = 'ATTACKER_WON';
-        } else if(this.round >= this.maxRounds){
-            this.result = 'DRAW';
+        if(this._attacker.isEmpty() && this._defender.isEmpty()){
+            this._result = 'DRAW';
+        }else if (this._attacker.isEmpty()) {
+            this._result = 'DEFENDER_WON';
+        } else if (this._defender.isEmpty()) {
+            this._result = 'ATTACKER_WON';
+        } else if(this._round >= this._maxRounds){
+            this._result = 'DRAW';
         }else{
-            this.result = 'OPEN';
+            this._result = 'OPEN';
         }
     }
 }

@@ -3,99 +3,99 @@ import { ResourceAmount } from './ResourceAmount';
 import assert = require("assert");
 
 export class ResourceInventory implements ResourceAmount{
-    private carbon : bigint = 0n;
-    private metal : bigint = 0n;
-    private silicon : bigint = 0n;
-    private synthetics : bigint = 0n;
-    private propellant : bigint = 0n;
+    private _carbon : bigint = 0n;
+    private _metal : bigint = 0n;
+    private _silicon : bigint = 0n;
+    private _synthetics : bigint = 0n;
+    private _propellant : bigint = 0n;
 
     constructor(){
     }
 
     public isNothing():boolean{
-        return this.carbon === 0n &&
-            this.metal === 0n &&
-            this.silicon === 0n &&
-            this.synthetics === 0n &&
-            this.propellant === 0n;
+        return this._carbon === 0n &&
+            this._metal === 0n &&
+            this._silicon === 0n &&
+            this._synthetics === 0n &&
+            this._propellant === 0n;
     }
-    public getCarbon() : bigint{
-        return this.carbon;
+    public get carbon() : bigint{
+        return this._carbon;
     }
-    public getMetal() : bigint{
-        return this.metal;
+    public get metal() : bigint{
+        return this._metal;
     }
-    public getSilicon() : bigint{
-        return this.silicon;
+    public get silicon() : bigint{
+        return this._silicon;
     }
-    public getSynthetics() : bigint{
-        return this.synthetics;
+    public get synthetics() : bigint{
+        return this._synthetics;
     }
-    public getPropellant() : bigint{
-        return this.propellant;
+    public get propellant() : bigint{
+        return this._propellant;
     }
     
-    public setCarbon(carbon : bigint){
+    public set carbon(carbon : bigint){
         assert(carbon >= 0n);
-        this.carbon = carbon;
+        this._carbon = carbon;
     }
-    public setMetal(metal : bigint){
+    public set metal(metal : bigint){
         assert(metal >= 0n);
-        this.metal = metal;
+        this._metal = metal;
     }
-    public setSilicon(silicon : bigint){
+    public set silicon(silicon : bigint){
         assert(silicon >= 0n);
-        this.silicon = silicon;
+        this._silicon = silicon;
     }
-    public setSynthetics(synthetics : bigint){
+    public set synthetics(synthetics : bigint){
         assert(synthetics >= 0n);
-        this.synthetics = synthetics;
+        this._synthetics = synthetics;
     }
-    public setPropellant(propellant : bigint) {
+    public set propellant(propellant : bigint) {
         assert(propellant >= 0n);
-        this.propellant = propellant;
+        this._propellant = propellant;
     }
     
     public addCarbon(carbon : bigint){
         assert(carbon >= 0n);
-         this.carbon += carbon;
+         this._carbon += carbon;
     }
     public addMetal(metal : bigint){
         assert(metal >= 0n);
-        this.metal += metal;
+        this._metal += metal;
     }
     public addSilicon(silicon : bigint){
         assert(silicon >= 0n);
-        this.silicon += silicon;
+        this._silicon += silicon;
     }
     public addSynthetics(synthetics : bigint){
         assert(synthetics >= 0n);
-        this.synthetics += synthetics;
+        this._synthetics += synthetics;
     }
     public addPropellant(propellant : bigint) {
         assert(propellant >= 0n);
-        this.propellant += propellant;
+        this._propellant += propellant;
     }
 
     public add(amount : ResourceAmount){
-        this.carbon += amount.getCarbon();
-        this.metal += amount.getMetal();
-        this.silicon += amount.getSilicon();
-        this.synthetics += amount.getSynthetics();
-        this.propellant += amount.getPropellant();
+        this._carbon += amount.carbon;
+        this._metal += amount.metal;
+        this._silicon += amount.silicon;
+        this._synthetics += amount.synthetics;
+        this._propellant += amount.propellant;
     }
     public subtract(amount : ResourceAmount) : boolean{
-        if(this.carbon >= amount.getCarbon() &&
-            this.metal >= amount.getMetal() &&
-            this.silicon >= amount.getSilicon() &&
-            this.synthetics >= amount.getSynthetics() &&
-            this.propellant >= amount.getPropellant()
+        if(this._carbon >= amount.carbon &&
+            this._metal >= amount.metal &&
+            this._silicon >= amount.silicon &&
+            this._synthetics >= amount.synthetics &&
+            this._propellant >= amount.propellant
         ){
-            this.carbon -= amount.getCarbon();
-            this.metal -= amount.getMetal();
-            this.silicon -= amount.getSilicon();
-            this.synthetics -= amount.getSynthetics();
-            this.propellant -= amount.getPropellant();
+            this._carbon -= amount.carbon;
+            this._metal -= amount.metal;
+            this._silicon -= amount.silicon;
+            this._synthetics -= amount.synthetics;
+            this._propellant -= amount.propellant;
             return true;
         }else{
             return false;
@@ -103,10 +103,10 @@ export class ResourceInventory implements ResourceAmount{
     }
 
     public toResourceAmount(): ResourceAmount{
-        return new ImmutableResourceAmount(this.carbon, this.metal, this.silicon, this.synthetics, this.propellant);
+        return new ImmutableResourceAmount(this._carbon, this._metal, this._silicon, this._synthetics, this._propellant);
     }
 
     public toString(): string{        
-        return `{carbon:${this.carbon},metal:${this.metal},silicon:${this.silicon},synthetics:${this.synthetics},propellant:${this.propellant}}`
+        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`
     }
 }

@@ -11,23 +11,23 @@ import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
 
 export class Ship implements Simulatable{
-    private fleet: Fleet | null;
-    private shield: Shield;
-    private hull: Hull;
-    private weapon: Weapon;
+    private _fleet: Fleet | null;
+    private _shield: Shield;
+    private _hull: Hull;
+    private _weapon: Weapon;
 
     constructor(hull: Hull, shield: Shield, weapon: Weapon) {
-        this.hull = hull;
-        this.shield = shield;
-        this.weapon = weapon;
-        this.fleet = null;
+        this._fleet = null;
+        this._shield = shield;
+        this._hull = hull;
+        this._weapon = weapon;
     }
 
     public join(fleet: Fleet): boolean {
-        if (this.fleet != fleet) {
+        if (this._fleet != fleet) {
             this.leave(fleet);
-            this.fleet = fleet;
-            this.fleet.join(this);
+            this._fleet = fleet;
+            this._fleet.join(this);
             LOGGER.debug(`${this} joined ${fleet}`);
             return true;
         } else {
@@ -36,9 +36,9 @@ export class Ship implements Simulatable{
     }
 
     public leave(fleet: Fleet): boolean {
-        if (this.fleet && this.fleet == fleet) {
-            let previousFleet = this.fleet;
-            this.fleet = null;
+        if (this._fleet && this._fleet == fleet) {
+            let previousFleet = this._fleet;
+            this._fleet = null;
             previousFleet.leave(this);
             LOGGER.debug(`${this} left ${fleet}`);
             return true;
@@ -48,42 +48,42 @@ export class Ship implements Simulatable{
     }
 
     public take(damage: Damage): Damage {
-        let damageDealtToShield: Damage = this.shield.take(damage);
+        let damageDealtToShield: Damage = this._shield.take(damage);
         if (!damageDealtToShield.isNoDamage()) {
-            LOGGER.trace(`${damageDealtToShield} has been dealt to ${this.shield}`);
+            LOGGER.trace(`${damageDealtToShield} has been dealt to ${this._shield}`);
         }
         let remainingDamage = damage.decreaseBy(damageDealtToShield);
-        if (this.shield.isDestroyed() && !remainingDamage.isNoDamage()) {
-            let damageDealtToHull: Damage = this.hull.take(remainingDamage);
+        if (this._shield.isDestroyed() && !remainingDamage.isNoDamage()) {
+            let damageDealtToHull: Damage = this._hull.take(remainingDamage);
             if (!damageDealtToHull.isNoDamage()) {
-                LOGGER.trace(`${damageDealtToHull} has been dealt to ${this.hull}`);
+                LOGGER.trace(`${damageDealtToHull} has been dealt to ${this._hull}`);
             }
-            if (this.hull.isDestroyed()) {
-                LOGGER.debug(`${this.hull} has been destroyed`);
+            if (this._hull.isDestroyed()) {
+                LOGGER.debug(`${this._hull} has been destroyed`);
                 this.destroy();
             }
             return remainingDamage.decreaseBy(damageDealtToHull);
         } else {
-            LOGGER.trace(`${damage} has been absorbed by ${this.shield}`);
+            LOGGER.trace(`${damage} has been absorbed by ${this._shield}`);
             return remainingDamage;
         }
     }
 
     public destroy(): boolean {
         LOGGER.info(`${this} has been destroyed`);
-        this.shield.destroy();
-        this.hull.destroy();
-        this.fleet?.leave(this);
+        this._shield.destroy();
+        this._hull.destroy();
+        this._fleet?.leave(this);
         return true;
     }
 
     public isDestroyed() {
-        return this.hull.isDestroyed();
+        return this._hull.isDestroyed();
     }
 
     public update(deltaTime : Ticks): void {
         assert(!this.isDestroyed());
-        this.shield.update(deltaTime);
+        this._shield.update(deltaTime);
     }
 
     private selectTarget(fleet: Fleet, hit: number): Ship | null {
@@ -96,14 +96,14 @@ export class Ship implements Simulatable{
     }
 
     private shotAt(fleet: Fleet, shot: number) {
-        let d: Damage = this.weapon.attack();
-        let remainingTargets: number = this.weapon.getTargets();
+        let d: Damage = this._weapon.attack();
+        let remainingTargets: number = this._weapon.targets;
         LOGGER.trace(`${this} shoots at ${fleet} for the ${shot + 1} time`);
         do {
-            let target: Ship | null = this.selectTarget(fleet, shot + this.weapon.getTargets() - remainingTargets);
+            let target: Ship | null = this.selectTarget(fleet, shot + this._weapon.targets - remainingTargets);
             if (target) {
                 target.take(d);
-                d = d.decreaseBy(d.getValue() * this.weapon.getSplashCoefficiant());
+                d = d.decreaseBy(d.getValue() * this._weapon.splashCoefficiant);
                 remainingTargets -= 1;
             } else {
                 remainingTargets = 0;
@@ -115,7 +115,7 @@ export class Ship implements Simulatable{
         assert(!this.isDestroyed());
         if (!fleet.isEmpty()) {
             LOGGER.trace(`${this} is going to attack ${fleet}`);
-            for (let shot = 0; shot < this.weapon.getShots(); shot++) {
+            for (let shot = 0; shot < this._weapon.shots; shot++) {
                 this.shotAt(fleet, shot);
             }
             return true
@@ -126,7 +126,7 @@ export class Ship implements Simulatable{
 
 
     public toString(): string {
-        return `Ship{hull:${this.hull},shield:${this.shield},weapon:${this.weapon},fleet:${this.fleet}}`
+        return `Ship{hull:${this._hull},shield:${this._shield},weapon:${this._weapon},fleet:${this._fleet}}`
     }
 }
 

@@ -5,54 +5,54 @@ import { Damage } from "./Damage";
 import { lookupDamageCoefficiant } from "./DamageCoefficiants";
 
 export class SimpleDestroyable implements Destroyable {
-    private readonly maxHp: number;
-    private hp: number;
-    private readonly defenseType: DefenseType;
+    private readonly _maxHp: number;
+    private _hp: number;
+    private readonly _defenseType: DefenseType;
 
     constructor(hp: number, defenseType: DefenseType = 'PASSIVE') {
         assert(hp > 0);
-        this.hp = hp;
-        this.maxHp = hp;
-        this.defenseType = defenseType;
+        this._hp = hp;
+        this._maxHp = hp;
+        this._defenseType = defenseType;
     }
 
-    protected getHp(): number {
-        return this.hp;
+    protected get hp(): number {
+        return this._hp;
     }
 
-    protected setHp(hp: number) {
-        assert(hp >= 0 && hp <= this.maxHp);
-        this.hp = hp;
+    protected set hp(hp: number) {
+        assert(hp >= 0 && hp <= this._maxHp);
+        this._hp = hp;
     }
 
-    protected getMaxHp(): number {
-        return this.maxHp;
+    protected get maxHp(): number {
+        return this._maxHp;
     }
 
-    protected getDefenseType(): DefenseType {
-        return this.defenseType;
+    protected get defenseType(): DefenseType {
+        return this._defenseType;
     }
 
     public take(damage: Damage): Damage {
-        let coefficiant = lookupDamageCoefficiant(damage.getType(), this.defenseType)
+        let coefficiant = lookupDamageCoefficiant(damage.getType(), this._defenseType)
 
         let rawDamageValue = damage.getValue() * coefficiant;
-        let previousHp = this.hp;
-        if (rawDamageValue > this.hp) {
+        let previousHp = this._hp;
+        if (rawDamageValue > this._hp) {
             this.destroy();
             return damage.setTo(previousHp / coefficiant);
         } else {
-            this.hp -= rawDamageValue;
+            this._hp -= rawDamageValue;
             return damage;
         }
     }
     public destroy() {
-        this.hp = 0;
+        this._hp = 0;
     }
     public isDamaged(): boolean {
-        return this.hp < this.maxHp;
+        return this._hp < this._maxHp;
     }
     public isDestroyed(): boolean {
-        return this.hp <= 0;
+        return this._hp <= 0;
     }
 }

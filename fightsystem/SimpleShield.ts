@@ -7,28 +7,28 @@ import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
 
 export class SimpleShield extends SimpleDestroyable implements Shield {
-    private readonly regenerationRate: number;
-    private readonly everyXTicks : EveryXTicks;
+    private readonly _regenerationRate: number;
+    private readonly _everyXTicks : EveryXTicks;
 
     constructor(hp: number, regenerationRate: number, defenseType: DefenseType = 'ENERGY') {
         super(hp, defenseType);
         assert(regenerationRate >= 0);
-        this.regenerationRate = regenerationRate;
-        this.everyXTicks = new EveryXTicks(3n, ()=>this.regenerate());
+        this._regenerationRate = regenerationRate;
+        this._everyXTicks = new EveryXTicks(3n, ()=>this.regenerate());
     }
 
     private regenerate(){
-        let newHp = Math.min(this.getMaxHp(), this.getHp() + this.regenerationRate);
-        if (this.getHp() !== newHp) {
-            LOGGER.info(`${this} is regenerating ${newHp - this.getHp()}hp`);
-            this.setHp(newHp);
+        let newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
+        if (this.hp !== newHp) {
+            LOGGER.info(`${this} is regenerating ${newHp - this.hp}hp`);
+            this.hp = newHp;
         }
     }
 
     public update(deltaTime : Ticks): void {
-        this.everyXTicks.update(deltaTime);
+        this._everyXTicks.update(deltaTime);
     }
     public toString(): string {
-        return `SimpleShield{hp:${this.getHp()}/${this.getMaxHp()},type:${this.getDefenseType()},regenRate:${this.regenerationRate}}`;
+        return `SimpleShield{hp:${this.hp}/${this.maxHp},type:${this.defenseType},regenRate:${this._regenerationRate}}`;
     }
 }

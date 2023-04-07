@@ -8,26 +8,26 @@ import { Labeled } from '../Labeled';
 
 export class Planet implements Simulatable{
     
-    private readonly structures : Structure[] = [];
-    private readonly resources : ResourceInventory;
+    private readonly _structures : Structure[] = [];
+    private readonly _resources : ResourceInventory;
 
     constructor(){
-        this.resources = new ResourceInventory();
+        this._resources = new ResourceInventory();
     }
 
     public build(structure : Structure){
-        this.structures.push(structure);
+        this._structures.push(structure);
     }
 
     public update(deltaTime : Ticks){
-        this.structures.forEach(structure =>{
+        this._structures.forEach(structure =>{
             const production = structure.produce(deltaTime);
-            this.resources.add(production);
+            this._resources.add(production);
         });
     }
     
     public toString(): string{        
-        return `Planet{resources:${this.resources},structures:${this.structures}}`
+        return `Planet{resources:${this._resources},structures:${this._structures}}`
     }
 }
 

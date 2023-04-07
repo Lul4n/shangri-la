@@ -9,6 +9,6 @@ export class SimpleHull extends SimpleDestroyable implements Hull {
     }
 
     public toString(): string {
-        return `SimpleHull{hp:${this.getHp()}/${this.getMaxHp()},type:${this.getDefenseType()}}`;
+        return `SimpleHull{hp:${this.hp}/${this.maxHp},type:${this.defenseType}}`;
     }
 }

@@ -1,8 +1,8 @@
 
 export interface ResourceAmount{
-    getCarbon() : bigint;
-    getMetal() : bigint;
-    getSilicon() : bigint;
-    getSynthetics() : bigint;
-    getPropellant() : bigint;
+    get carbon() : bigint;
+    get metal() : bigint;
+    get silicon() : bigint;
+    get synthetics() : bigint;
+    get propellant() : bigint;
 }

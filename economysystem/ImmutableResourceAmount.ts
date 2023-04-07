@@ -20,18 +20,18 @@ export class ImmutableResourceAmount implements ResourceAmount{
     }
     public static copyFrom(copyFrom:ResourceAmount) : ImmutableResourceAmount{
         return new ImmutableResourceAmount(
-            copyFrom.getCarbon(),
-            copyFrom.getMetal(),
-            copyFrom.getSilicon(),
-            copyFrom.getSynthetics(),
-            copyFrom.getPropellant()
+            copyFrom.carbon,
+            copyFrom.metal,
+            copyFrom.silicon,
+            copyFrom.synthetics,
+            copyFrom.propellant
         );
     }
-    private readonly carbon : bigint;
-    private readonly metal : bigint;
-    private readonly silicon : bigint;
-    private readonly synthetics : bigint;
-    private readonly propellant : bigint;
+    private readonly _carbon : bigint;
+    private readonly _metal : bigint;
+    private readonly _silicon : bigint;
+    private readonly _synthetics : bigint;
+    private readonly _propellant : bigint;
 
     constructor(carbon : bigint, metal : bigint, silicon : bigint, synthetics : bigint, propellant : bigint){
         assert(carbon >= 0n);
@@ -40,11 +40,11 @@ export class ImmutableResourceAmount implements ResourceAmount{
         assert(synthetics >= 0n);
         assert(propellant >= 0n);
 
-        this.carbon = carbon;
-        this.metal = metal;
-        this.silicon = silicon;
-        this.synthetics = synthetics;
-        this.propellant = propellant;
+        this._carbon = carbon;
+        this._metal = metal;
+        this._silicon = silicon;
+        this._synthetics = synthetics;
+        this._propellant = propellant;
     }
 
     public multiply(factor : number | bigint): ImmutableResourceAmount{
@@ -55,26 +55,26 @@ export class ImmutableResourceAmount implements ResourceAmount{
         }else{
             bigIntFactor = factor;
         }
-        return new ImmutableResourceAmount(this.carbon * bigIntFactor, this.metal * bigIntFactor, this.silicon * bigIntFactor, this.synthetics *  bigIntFactor, this.propellant * bigIntFactor);
+        return new ImmutableResourceAmount(this._carbon * bigIntFactor, this._metal * bigIntFactor, this._silicon * bigIntFactor, this._synthetics *  bigIntFactor, this._propellant * bigIntFactor);
     }
 
-    public getCarbon(): bigint {
-        return this.carbon;
+    public get carbon(): bigint {
+        return this._carbon;
     }
-    public getMetal(): bigint {
-        return this.metal;
+    public get metal(): bigint {
+        return this._metal;
     }
-    public getSilicon(): bigint {
-        return this.silicon;
+    public get silicon(): bigint {
+        return this._silicon;
     }
-    public getSynthetics(): bigint {
-        return this.synthetics;
+    public get synthetics(): bigint {
+        return this._synthetics;
     }
-    public getPropellant(): bigint {
-        return this.propellant;
+    public get propellant(): bigint {
+        return this._propellant;
     }
     
     public toString(): string{        
-        return `{carbon:${this.carbon},metal:${this.metal},silicon:${this.silicon},synthetics:${this.synthetics},propellant:${this.propellant}}`
+        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`
     }
 }

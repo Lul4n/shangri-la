@@ -1,8 +1,8 @@
 import { Damage } from "./Damage";
 
 export interface Weapon {
-    getSplashCoefficiant(): number;
-    getTargets(): number;
-    getShots(): number;
+    get splashCoefficiant(): number;
+    get targets(): number;
+    get shots(): number;
     attack(): Damage;
 }

@@ -5,18 +5,18 @@ import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
 
 export class Fleet implements Simulatable{
-    private ships: Set<Ship> = new Set<Ship>();
+    private readonly _ships: Set<Ship> = new Set<Ship>();
 
     public getShips(): Set<Ship> {
-        return this.ships;
+        return this._ships;
     }
     public isEmpty() {
-        return this.ships.size == 0;
+        return this._ships.size == 0;
     }
 
     public join(ship: Ship): boolean {
-        if (!this.ships.has(ship)) {
-            this.ships.add(ship);
+        if (!this._ships.has(ship)) {
+            this._ships.add(ship);
             ship.join(this);
             LOGGER.debug(`${this} is joined by ${ship}`);
             return true;
@@ -24,8 +24,8 @@ export class Fleet implements Simulatable{
         return false;
     }
     public leave(ship: Ship): boolean {
-        if (this.ships.has(ship)) {
-            this.ships.delete(ship);
+        if (this._ships.has(ship)) {
+            this._ships.delete(ship);
             ship.leave(this);
             LOGGER.debug(`${this} is left by ${ship}`);
             return true;
@@ -35,20 +35,20 @@ export class Fleet implements Simulatable{
     }
 
     public update(deltaTime : Ticks) {
-        this.ships.forEach(ship => {
+        this._ships.forEach(ship => {
             ship.update(deltaTime);
         });
     }
 
     public attack(other: Fleet) {
         LOGGER.trace(`${this} is going to attack ${other}`);
-        this.ships.forEach(ship => {
+        this._ships.forEach(ship => {
             ship.attack(other);
         });
     }
 
     public toString(): string {
-        return `Fleet{ships:${this.ships.size}}`
+        return `Fleet{ships:${this._ships.size}}`
     }
 }
 
