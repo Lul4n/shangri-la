@@ -5,7 +5,7 @@ export interface Labeled{
     hasLabel() : boolean;
 }
 
-type Constructor = new (...args: any[]) => {};
+type Constructor = new (...args: any[]) => object;
 export function Labeled<TBase extends Constructor>(Base: TBase) {
     return class Labeled extends Base implements Labeled{
         private label : string | null = null;

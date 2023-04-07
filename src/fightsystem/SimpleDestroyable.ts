@@ -34,10 +34,10 @@ export class SimpleDestroyable implements Destroyable {
     }
 
     public take(damage: Damage): Damage {
-        let coefficiant = lookupDamageCoefficiant(damage.getType(), this._defenseType)
+        const coefficiant = lookupDamageCoefficiant(damage.getType(), this._defenseType)
 
-        let rawDamageValue = damage.getValue() * coefficiant;
-        let previousHp = this._hp;
+        const rawDamageValue = damage.getValue() * coefficiant;
+        const previousHp = this._hp;
         if (rawDamageValue > this._hp) {
             this.destroy();
             return damage.setTo(previousHp / coefficiant);

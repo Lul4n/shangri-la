@@ -1,6 +1,6 @@
 import * as pino from "pino";
-
-let transport = pino.transport({
+/* eslint-disable */
+const transport = pino.transport({
     targets: [
         {
             target: "pino/file",

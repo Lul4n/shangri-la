@@ -1,12 +1,12 @@
 import { Battle } from './fightsystem/Battle';
-import { Fleet, LabeledFleet } from './fightsystem/Fleet';
+import { LabeledFleet } from './fightsystem/Fleet';
 import { ShipFactory } from './fightsystem/ShipFactory';
 import * as Utils from './Utils';
 import { LOGGER } from './Logger';
 import { Simulatable } from './simulation/Simulatable';
 import { Ticks } from './simulation/Ticks';
-import { System, LabeledSystem } from './economysystem/System';
-import { Planet, LabeledPlanet } from './economysystem/Planet';
+import { LabeledSystem } from './economysystem/System';
+import { LabeledPlanet } from './economysystem/Planet';
 import { LabeledStructure } from './economysystem/Structure';
 import { ImmutableResourceAmount } from './economysystem/ImmutableResourceAmount';
 

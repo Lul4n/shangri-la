@@ -17,7 +17,7 @@ export class Damage {
         } else if (other instanceof Damage) {
             return Damage.NO_DAMAGE;
         } else if (this._value > other) {
-            return new Damage(this._value - (other as number), this._dType);
+            return new Damage(this._value - other, this._dType);
         } else {
             return Damage.NO_DAMAGE;
         }

@@ -5,4 +5,5 @@ export interface Destroyable{
     take(damage: Damage): Damage;
     isDestroyed(): boolean;
     isDamaged(): boolean;
+    toString() : string;
 }

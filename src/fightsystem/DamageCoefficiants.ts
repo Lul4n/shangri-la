@@ -1,7 +1,7 @@
 import { DamageType } from './DamageType';
 import { DefenseType } from './DefenseType';
 
-interface DamageCoefficiants extends Record<DamageType, Record<DefenseType, number>> { };
+interface DamageCoefficiants extends Record<DamageType, Record<DefenseType, number>> { }
 
 const DAMAGE_COEFFICIANTS: DamageCoefficiants = {
     NONE: { NONE: 0, PASSIVE: 0, ENERGY: 0, ACTIVE: 0 },

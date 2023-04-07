@@ -9,9 +9,6 @@ export class ResourceInventory implements ResourceAmount{
     private _synthetics : bigint = 0n;
     private _propellant : bigint = 0n;
 
-    constructor(){
-    }
-
     public isNothing():boolean{
         return this._carbon === 0n &&
             this._metal === 0n &&
@@ -19,58 +16,56 @@ export class ResourceInventory implements ResourceAmount{
             this._synthetics === 0n &&
             this._propellant === 0n;
     }
-    public get carbon() : bigint{
-        return this._carbon;
-    }
-    public get metal() : bigint{
-        return this._metal;
-    }
-    public get silicon() : bigint{
-        return this._silicon;
-    }
-    public get synthetics() : bigint{
-        return this._synthetics;
-    }
-    public get propellant() : bigint{
-        return this._propellant;
-    }
-    
     public set carbon(carbon : bigint){
         assert(carbon >= 0n);
         this._carbon = carbon;
+    }
+    public get carbon() : bigint{
+        return this._carbon;
+    }
+    public addCarbon(carbon : bigint){
+        assert(carbon >= 0n);
+         this._carbon += carbon;
+    }
+    public get metal() : bigint{
+        return this._metal;
     }
     public set metal(metal : bigint){
         assert(metal >= 0n);
         this._metal = metal;
     }
-    public set silicon(silicon : bigint){
-        assert(silicon >= 0n);
-        this._silicon = silicon;
-    }
-    public set synthetics(synthetics : bigint){
-        assert(synthetics >= 0n);
-        this._synthetics = synthetics;
-    }
-    public set propellant(propellant : bigint) {
-        assert(propellant >= 0n);
-        this._propellant = propellant;
-    }
-    
-    public addCarbon(carbon : bigint){
-        assert(carbon >= 0n);
-         this._carbon += carbon;
-    }
     public addMetal(metal : bigint){
         assert(metal >= 0n);
         this._metal += metal;
+    }
+    public get silicon() : bigint{
+        return this._silicon;
+    }
+    public set silicon(silicon : bigint){
+        assert(silicon >= 0n);
+        this._silicon = silicon;
     }
     public addSilicon(silicon : bigint){
         assert(silicon >= 0n);
         this._silicon += silicon;
     }
+    public get synthetics() : bigint{
+        return this._synthetics;
+    }
+    public set synthetics(synthetics : bigint){
+        assert(synthetics >= 0n);
+        this._synthetics = synthetics;
+    }
     public addSynthetics(synthetics : bigint){
         assert(synthetics >= 0n);
         this._synthetics += synthetics;
+    }
+    public get propellant() : bigint{
+        return this._propellant;
+    }
+    public set propellant(propellant : bigint) {
+        assert(propellant >= 0n);
+        this._propellant = propellant;
     }
     public addPropellant(propellant : bigint) {
         assert(propellant >= 0n);

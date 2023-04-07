@@ -18,7 +18,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
     }
 
     private regenerate(){
-        let newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
+        const newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
         if (this.hp !== newHp) {
             LOGGER.info(`${this} is regenerating ${newHp - this.hp}hp`);
             this.hp = newHp;

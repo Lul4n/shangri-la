@@ -37,7 +37,7 @@ export class Ship implements Simulatable{
 
     public leave(fleet: Fleet): boolean {
         if (this._fleet && this._fleet == fleet) {
-            let previousFleet = this._fleet;
+            const previousFleet = this._fleet;
             this._fleet = null;
             previousFleet.leave(this);
             LOGGER.debug(`${this} left ${fleet}`);
@@ -48,13 +48,13 @@ export class Ship implements Simulatable{
     }
 
     public take(damage: Damage): Damage {
-        let damageDealtToShield: Damage = this._shield.take(damage);
+        const damageDealtToShield: Damage = this._shield.take(damage);
         if (!damageDealtToShield.isNoDamage()) {
             LOGGER.trace(`${damageDealtToShield} has been dealt to ${this._shield}`);
         }
-        let remainingDamage = damage.decreaseBy(damageDealtToShield);
+        const remainingDamage = damage.decreaseBy(damageDealtToShield);
         if (this._shield.isDestroyed() && !remainingDamage.isNoDamage()) {
-            let damageDealtToHull: Damage = this._hull.take(remainingDamage);
+            const damageDealtToHull: Damage = this._hull.take(remainingDamage);
             if (!damageDealtToHull.isNoDamage()) {
                 LOGGER.trace(`${damageDealtToHull} has been dealt to ${this._hull}`);
             }
@@ -90,7 +90,7 @@ export class Ship implements Simulatable{
         if (fleet.isEmpty()) {
             return null;
         } else {
-            let ships = Array.from(fleet.getShips());
+            const ships = Array.from(fleet.getShips());
             return ships[hit % ships.length];
         }
     }
@@ -100,7 +100,7 @@ export class Ship implements Simulatable{
         let remainingTargets: number = this._weapon.targets;
         LOGGER.trace(`${this} shoots at ${fleet} for the ${shot + 1} time`);
         do {
-            let target: Ship | null = this.selectTarget(fleet, shot + this._weapon.targets - remainingTargets);
+            const target: Ship | null = this.selectTarget(fleet, shot + this._weapon.targets - remainingTargets);
             if (target) {
                 target.take(d);
                 d = d.decreaseBy(d.getValue() * this._weapon.splashCoefficiant);

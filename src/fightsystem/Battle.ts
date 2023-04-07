@@ -1,5 +1,3 @@
-import assert = require("assert");
-
 import * as Utils from '../Utils';
 
 import { Fleet } from "./Fleet";

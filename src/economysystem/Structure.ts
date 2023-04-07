@@ -1,6 +1,5 @@
 import { Ticks } from "../simulation/Ticks";
 import { ResourceProduction } from "./ResourceProduction";
-import { ResourceInventory } from './ResourceInventory';
 import { ResourceAmount } from './ResourceAmount';
 import { ImmutableResourceAmount } from './ImmutableResourceAmount';
 import assert = require("assert");

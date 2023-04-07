@@ -5,4 +5,5 @@ export interface Weapon {
     get targets(): number;
     get shots(): number;
     attack(): Damage;
+    toString() : string;
 }
