@@ -2,23 +2,23 @@ import assert = require('assert');
 import { ResourceAmount } from './ResourceAmount';
 
 
-export class ImmutableResourceAmount implements ResourceAmount{
-    public static carbon(carbon : bigint) : ImmutableResourceAmount{
-        return new ImmutableResourceAmount(carbon,0n,0n,0n,0n);
+export class ImmutableResourceAmount implements ResourceAmount {
+    public static carbon(carbon: bigint): ImmutableResourceAmount {
+        return new ImmutableResourceAmount(carbon, 0n, 0n, 0n, 0n);
     }
-    public static metal(metal : bigint) : ImmutableResourceAmount{
-        return new ImmutableResourceAmount(0n,metal,0n,0n,0n);
+    public static metal(metal: bigint): ImmutableResourceAmount {
+        return new ImmutableResourceAmount(0n, metal, 0n, 0n, 0n);
     }
-    public static silicon(silicon : bigint) : ImmutableResourceAmount{
-        return new ImmutableResourceAmount(0n,0n,silicon,0n,0n);
+    public static silicon(silicon: bigint): ImmutableResourceAmount {
+        return new ImmutableResourceAmount(0n, 0n, silicon, 0n, 0n);
     }
-    public static synthetics(synthetics : bigint) : ImmutableResourceAmount{
-        return new ImmutableResourceAmount(0n,0n,0n,synthetics,0n);
+    public static synthetics(synthetics: bigint): ImmutableResourceAmount {
+        return new ImmutableResourceAmount(0n, 0n, 0n, synthetics, 0n);
     }
-    public static propellant(propellant : bigint) : ImmutableResourceAmount{
-        return new ImmutableResourceAmount(0n,0n,0n,0n,propellant);
+    public static propellant(propellant: bigint): ImmutableResourceAmount {
+        return new ImmutableResourceAmount(0n, 0n, 0n, 0n, propellant);
     }
-    public static copyFrom(copyFrom:ResourceAmount) : ImmutableResourceAmount{
+    public static copyFrom(copyFrom: ResourceAmount): ImmutableResourceAmount {
         return new ImmutableResourceAmount(
             copyFrom.carbon,
             copyFrom.metal,
@@ -27,13 +27,13 @@ export class ImmutableResourceAmount implements ResourceAmount{
             copyFrom.propellant
         );
     }
-    private readonly _carbon : bigint;
-    private readonly _metal : bigint;
-    private readonly _silicon : bigint;
-    private readonly _synthetics : bigint;
-    private readonly _propellant : bigint;
+    private readonly _carbon: bigint;
+    private readonly _metal: bigint;
+    private readonly _silicon: bigint;
+    private readonly _synthetics: bigint;
+    private readonly _propellant: bigint;
 
-    constructor(carbon : bigint, metal : bigint, silicon : bigint, synthetics : bigint, propellant : bigint){
+    constructor(carbon: bigint, metal: bigint, silicon: bigint, synthetics: bigint, propellant: bigint) {
         assert(carbon >= 0n);
         assert(metal >= 0n);
         assert(silicon >= 0n);
@@ -47,15 +47,15 @@ export class ImmutableResourceAmount implements ResourceAmount{
         this._propellant = propellant;
     }
 
-    public multiply(factor : number | bigint): ImmutableResourceAmount{
+    public multiply(factor: number | bigint): ImmutableResourceAmount {
         assert(factor >= 0);
         let bigIntFactor;
-        if(typeof factor === 'number'){
+        if (typeof factor === 'number') {
             bigIntFactor = BigInt(factor);
-        }else{
+        } else {
             bigIntFactor = factor;
         }
-        return new ImmutableResourceAmount(this._carbon * bigIntFactor, this._metal * bigIntFactor, this._silicon * bigIntFactor, this._synthetics *  bigIntFactor, this._propellant * bigIntFactor);
+        return new ImmutableResourceAmount(this._carbon * bigIntFactor, this._metal * bigIntFactor, this._silicon * bigIntFactor, this._synthetics * bigIntFactor, this._propellant * bigIntFactor);
     }
 
     public get carbon(): bigint {
@@ -73,8 +73,8 @@ export class ImmutableResourceAmount implements ResourceAmount{
     public get propellant(): bigint {
         return this._propellant;
     }
-    
-    public toString(): string{        
+
+    public toString(): string {
         return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`
     }
 }

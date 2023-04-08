@@ -4,7 +4,7 @@ import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
 
-export class Fleet implements Simulatable{
+export class Fleet implements Simulatable {
     private readonly _ships: Set<Ship> = new Set<Ship>();
 
     public getShips(): Set<Ship> {
@@ -34,7 +34,7 @@ export class Fleet implements Simulatable{
         }
     }
 
-    public update(deltaTime : Ticks) {
+    public update(deltaTime: Ticks) {
         this._ships.forEach(ship => {
             ship.update(deltaTime);
         });

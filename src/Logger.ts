@@ -16,4 +16,4 @@ const transport = pino.transport({
 });
 export const LOGGER = pino.pino({
     level: 'trace',
-}, transport);
+}, transport); 

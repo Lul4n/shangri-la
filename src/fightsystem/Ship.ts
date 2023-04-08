@@ -10,7 +10,7 @@ import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
 
-export class Ship implements Simulatable{
+export class Ship implements Simulatable {
     private _fleet: Fleet | null;
     private _shield: Shield;
     private _hull: Hull;
@@ -81,7 +81,7 @@ export class Ship implements Simulatable{
         return this._hull.isDestroyed();
     }
 
-    public update(deltaTime : Ticks): void {
+    public update(deltaTime: Ticks): void {
         assert(!this.isDestroyed());
         this._shield.update(deltaTime);
     }

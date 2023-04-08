@@ -10,7 +10,7 @@ import { LabeledPlanet } from './economysystem/Planet';
 import { LabeledStructure } from './economysystem/Structure';
 import { ImmutableResourceAmount } from './economysystem/ImmutableResourceAmount';
 
-const simulation : Simulatable[] = [];
+const simulation: Simulatable[] = [];
 
 const factory1 = new ShipFactory('red');
 const f1 = new LabeledFleet();
@@ -31,7 +31,7 @@ for (let i = 0; i < Utils.randomInt(900, 1000); i++) {
 const battle = new Battle(f1, f2, 100n);
 simulation.push(battle);
 
-const s1 = new LabeledSystem([1n,1n,1n]);
+const s1 = new LabeledSystem([1n, 1n, 1n]);
 s1.setLabel('Sonnensystem');
 const p1 = new LabeledPlanet();
 p1.setLabel('Erde');
@@ -41,12 +41,12 @@ p1.build(b1);
 s1.addPlanet(p1);
 simulation.push(s1);
 
-let tick : Ticks = 0n;
-setInterval(()=>{
+let tick: Ticks = 0n;
+setInterval(() => {
     const start = performance.now();
     tick++;
-    simulation.forEach(s=>s.update(1n));
+    simulation.forEach(s => s.update(1n));
 
     const end = performance.now();
-    LOGGER.info('calculated tick %s in %sms',tick, end-start);
+    LOGGER.info('calculated tick %s in %sms', tick, end - start);
 }, 1000);

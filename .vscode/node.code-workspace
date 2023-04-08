@@ -12,6 +12,7 @@
 		"debug.terminal.clearBeforeReusing": true,
 		"terminal.integrated.scrollback": 100000,
 		"eslint.format.enable": true,
+		"editor.formatOnSave": true,
 		"eslint.run": "onSave",
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": true

@@ -9,4 +9,4 @@ export function randomInt(min: number, max: number): number {
 
 export function randomBoolean(): boolean {
     return Math.random() >= 0.5;
-}
+} 

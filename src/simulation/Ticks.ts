@@ -1,1 +1,1 @@
-export type Ticks = bigint;
+export type Ticks = bigint; 

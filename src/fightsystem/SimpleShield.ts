@@ -8,16 +8,16 @@ import { EveryXTicks } from '../simulation/EveryXTicks';
 
 export class SimpleShield extends SimpleDestroyable implements Shield {
     private readonly _regenerationRate: number;
-    private readonly _everyXTicks : EveryXTicks;
+    private readonly _everyXTicks: EveryXTicks;
 
     constructor(hp: number, regenerationRate: number, defenseType: DefenseType = 'ENERGY') {
         super(hp, defenseType);
         assert(regenerationRate >= 0);
         this._regenerationRate = regenerationRate;
-        this._everyXTicks = new EveryXTicks(3n, ()=>this.regenerate());
+        this._everyXTicks = new EveryXTicks(3n, () => this.regenerate());
     }
 
-    private regenerate(){
+    private regenerate() {
         const newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
         if (this.hp !== newHp) {
             LOGGER.info(`${this} is regenerating ${newHp - this.hp}hp`);
@@ -25,7 +25,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
         }
     }
 
-    public update(deltaTime : Ticks): void {
+    public update(deltaTime: Ticks): void {
         this._everyXTicks.update(deltaTime);
     }
     public toString(): string {

@@ -1,1 +1,1 @@
-export type Coordinates = [bigint, bigint, bigint];
+export type Coordinates = [bigint, bigint, bigint]; 
