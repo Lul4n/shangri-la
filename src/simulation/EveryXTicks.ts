@@ -3,10 +3,9 @@ import { Simulatable } from './Simulatable';
 import { Ticks } from './Ticks';
 
 export class EveryXTicks implements Simulatable {
-
     private readonly _x: Ticks;
     private _ticks: Ticks;
-    private readonly _callback: () => void
+    private readonly _callback: () => void;
 
     constructor(x: Ticks, callback: () => void) {
         assert(x > 0);

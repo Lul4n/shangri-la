@@ -1,3 +1,3 @@
-import { Ticks } from "./Ticks";
+import { Ticks } from './Ticks';
 
-export type SimulationFunction = (deltaTime: Ticks) => void; 
+export type SimulationFunction = (deltaTime: Ticks) => void;

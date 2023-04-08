@@ -35,20 +35,20 @@ export class Fleet implements Simulatable {
     }
 
     public update(deltaTime: Ticks) {
-        this._ships.forEach(ship => {
+        this._ships.forEach((ship) => {
             ship.update(deltaTime);
         });
     }
 
     public attack(other: Fleet) {
         LOGGER.trace(`${this} is going to attack ${other}`);
-        this._ships.forEach(ship => {
+        this._ships.forEach((ship) => {
             ship.attack(other);
         });
     }
 
     public toString(): string {
-        return `Fleet{ships:${this._ships.size}}`
+        return `Fleet{ships:${this._ships.size}}`;
     }
 }
 

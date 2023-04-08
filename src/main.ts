@@ -45,7 +45,7 @@ let tick: Ticks = 0n;
 setInterval(() => {
     const start = performance.now();
     tick++;
-    simulation.forEach(s => s.update(1n));
+    simulation.forEach((s) => s.update(1n));
 
     const end = performance.now();
     LOGGER.info('calculated tick %s in %sms', tick, end - start);

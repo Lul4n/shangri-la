@@ -8,7 +8,6 @@ import { LOGGER } from '../Logger';
 import { Labeled } from '../Labeled';
 
 export class System implements Simulatable {
-
     private readonly _coordinates: Coordinates;
     private readonly _planets: Planet[] = [];
 
@@ -28,12 +27,12 @@ export class System implements Simulatable {
     }
 
     public update(deltaTime: Ticks) {
-        this._planets.forEach(p => p.update(deltaTime));
-        LOGGER.info("%s", this);
+        this._planets.forEach((p) => p.update(deltaTime));
+        LOGGER.info('%s', this);
     }
 
     public toString(): string {
-        return `System{planets:${this._planets}}`
+        return `System{planets:${this._planets}}`;
     }
 }
 export const LabeledSystem = Labeled(System);

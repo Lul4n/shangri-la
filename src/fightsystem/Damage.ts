@@ -1,5 +1,5 @@
-import assert = require("assert");
-import { DamageType } from "./DamageType";
+import assert = require('assert');
+import { DamageType } from './DamageType';
 
 export class Damage {
     private static readonly NO_DAMAGE = new Damage(0.0, 'NONE');
@@ -37,6 +37,6 @@ export class Damage {
     }
 
     public toString(): string {
-        return `Damage{value:${this._value},type:${this._dType}}`
+        return `Damage{value:${this._value},type:${this._dType}}`;
     }
 }

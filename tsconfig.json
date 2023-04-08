@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "es2022",
     "module": "commonjs",
     "outDir": "out",
     "sourceMap": true,
@@ -18,7 +18,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "allowUnreachableCode": false,
+    "allowUnreachableCode": false, 
     "allowUnusedLabels": false,
     "alwaysStrict": true,
     "exactOptionalPropertyTypes": true,

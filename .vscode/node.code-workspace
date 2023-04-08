@@ -1,26 +1,26 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
-	"settings": {
-		"files.exclude": {
-			"out/**/*.js": true,
-			"out/**/*.js.map": true
-		},
-		"debug.terminal.clearBeforeReusing": true,
-		"terminal.integrated.scrollback": 100000,
-		"eslint.format.enable": true,
-		"editor.formatOnSave": true,
-		"eslint.run": "onSave",
-		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
-		},
-		"eslint.validate": [
-			"typescript"
-		],
-		"genGetSet.scanOnSave": true,
-		"genGetSet.spacedImportLine": true
-	}
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "out/**/*.js": true,
+            "out/**/*.js.map": true
+        },
+        "debug.terminal.clearBeforeReusing": true,
+        "terminal.integrated.scrollback": 100000,
+        "eslint.run": "onSave",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "eslint.validate": ["typescript"],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "eslint.format.enable": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false, // required
+        "editor.formatOnType": false, // required
+        "editor.formatOnSaveMode": "file" // required to format on save
+    }
 }

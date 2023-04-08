@@ -1,6 +1,6 @@
 import { ImmutableResourceAmount } from './ImmutableResourceAmount';
 import { ResourceAmount } from './ResourceAmount';
-import assert = require("assert");
+import assert = require('assert');
 
 export class ResourceInventory implements ResourceAmount {
     private _carbon: bigint = 0n;
@@ -10,11 +10,7 @@ export class ResourceInventory implements ResourceAmount {
     private _propellant: bigint = 0n;
 
     public isNothing(): boolean {
-        return this._carbon === 0n &&
-            this._metal === 0n &&
-            this._silicon === 0n &&
-            this._synthetics === 0n &&
-            this._propellant === 0n;
+        return this._carbon === 0n && this._metal === 0n && this._silicon === 0n && this._synthetics === 0n && this._propellant === 0n;
     }
     public set carbon(carbon: bigint) {
         assert(carbon >= 0n);
@@ -80,12 +76,7 @@ export class ResourceInventory implements ResourceAmount {
         this._propellant += amount.propellant;
     }
     public subtract(amount: ResourceAmount): boolean {
-        if (this._carbon >= amount.carbon &&
-            this._metal >= amount.metal &&
-            this._silicon >= amount.silicon &&
-            this._synthetics >= amount.synthetics &&
-            this._propellant >= amount.propellant
-        ) {
+        if (this._carbon >= amount.carbon && this._metal >= amount.metal && this._silicon >= amount.silicon && this._synthetics >= amount.synthetics && this._propellant >= amount.propellant) {
             this._carbon -= amount.carbon;
             this._metal -= amount.metal;
             this._silicon -= amount.silicon;
@@ -102,6 +93,6 @@ export class ResourceInventory implements ResourceAmount {
     }
 
     public toString(): string {
-        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`
+        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`;
     }
 }

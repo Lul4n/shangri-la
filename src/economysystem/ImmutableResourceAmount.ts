@@ -1,7 +1,6 @@
 import assert = require('assert');
 import { ResourceAmount } from './ResourceAmount';
 
-
 export class ImmutableResourceAmount implements ResourceAmount {
     public static carbon(carbon: bigint): ImmutableResourceAmount {
         return new ImmutableResourceAmount(carbon, 0n, 0n, 0n, 0n);
@@ -19,13 +18,7 @@ export class ImmutableResourceAmount implements ResourceAmount {
         return new ImmutableResourceAmount(0n, 0n, 0n, 0n, propellant);
     }
     public static copyFrom(copyFrom: ResourceAmount): ImmutableResourceAmount {
-        return new ImmutableResourceAmount(
-            copyFrom.carbon,
-            copyFrom.metal,
-            copyFrom.silicon,
-            copyFrom.synthetics,
-            copyFrom.propellant
-        );
+        return new ImmutableResourceAmount(copyFrom.carbon, copyFrom.metal, copyFrom.silicon, copyFrom.synthetics, copyFrom.propellant);
     }
     private readonly _carbon: bigint;
     private readonly _metal: bigint;
@@ -75,6 +68,6 @@ export class ImmutableResourceAmount implements ResourceAmount {
     }
 
     public toString(): string {
-        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`
+        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`;
     }
 }

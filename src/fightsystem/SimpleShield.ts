@@ -1,8 +1,8 @@
-import assert = require("assert");
-import { DefenseType } from "./DefenseType";
-import { Shield } from "./Shield";
-import { SimpleDestroyable } from "./SimpleDestroyable";
-import { LOGGER } from "../Logger";
+import assert = require('assert');
+import { DefenseType } from './DefenseType';
+import { Shield } from './Shield';
+import { SimpleDestroyable } from './SimpleDestroyable';
+import { LOGGER } from '../Logger';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
 

@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-base-to-string */
 export interface Labeled {
@@ -24,7 +23,7 @@ export function Labeled<TBase extends Constructor>(Base: TBase) {
             return this.label;
         }
         override toString(): string {
-            return super.toString() + `@{label:${this.label}}`
+            return super.toString() + `@{label:${this.label}}`;
         }
     };
 }

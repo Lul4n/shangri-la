@@ -1,12 +1,11 @@
-import { Ticks } from "../simulation/Ticks";
-import { ResourceProduction } from "./ResourceProduction";
+import { Ticks } from '../simulation/Ticks';
+import { ResourceProduction } from './ResourceProduction';
 import { ResourceAmount } from './ResourceAmount';
 import { ImmutableResourceAmount } from './ImmutableResourceAmount';
-import assert = require("assert");
-import { Labeled } from "../Labeled";
+import assert = require('assert');
+import { Labeled } from '../Labeled';
 
 export class Structure implements ResourceProduction {
-
     private _baseProduction: ImmutableResourceAmount;
     private _level: bigint = 1n;
 
@@ -28,7 +27,7 @@ export class Structure implements ResourceProduction {
     }
 
     public toString(): string {
-        return `Structure{level:${this._level},baseProduction:${this._baseProduction}}`
+        return `Structure{level:${this._level},baseProduction:${this._baseProduction}}`;
     }
 }
 export const LabeledStructure = Labeled(Structure);

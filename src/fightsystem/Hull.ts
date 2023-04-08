@@ -1,5 +1,3 @@
-import { Destroyable } from "./Destroyable";
+import { Destroyable } from './Destroyable';
 
-
-export interface Hull extends Destroyable {
-} 
+export interface Hull extends Destroyable {}

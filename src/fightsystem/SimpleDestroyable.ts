@@ -1,8 +1,8 @@
-import assert = require("assert");
-import { DefenseType } from "./DefenseType";
-import { Destroyable } from "./Destroyable";
-import { Damage } from "./Damage";
-import { lookupDamageCoefficiant } from "./DamageCoefficiants";
+import assert = require('assert');
+import { DefenseType } from './DefenseType';
+import { Destroyable } from './Destroyable';
+import { Damage } from './Damage';
+import { lookupDamageCoefficiant } from './DamageCoefficiants';
 
 export class SimpleDestroyable implements Destroyable {
     private readonly _maxHp: number;
@@ -34,7 +34,7 @@ export class SimpleDestroyable implements Destroyable {
     }
 
     public take(damage: Damage): Damage {
-        const coefficiant = lookupDamageCoefficiant(damage.getType(), this._defenseType)
+        const coefficiant = lookupDamageCoefficiant(damage.getType(), this._defenseType);
 
         const rawDamageValue = damage.getValue() * coefficiant;
         const previousHp = this._hp;

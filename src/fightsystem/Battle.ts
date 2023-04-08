@@ -1,10 +1,10 @@
 import * as Utils from '../Utils';
 
-import { Fleet } from "./Fleet";
-import { LOGGER } from "../Logger";
-import { Simulatable } from "../simulation/Simulatable";
-import { Ticks } from "../simulation/Ticks";
-import { EveryXTicks } from "../simulation/EveryXTicks";
+import { Fleet } from './Fleet';
+import { LOGGER } from '../Logger';
+import { Simulatable } from '../simulation/Simulatable';
+import { Ticks } from '../simulation/Ticks';
+import { EveryXTicks } from '../simulation/EveryXTicks';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 

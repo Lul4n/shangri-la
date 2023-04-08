@@ -1,7 +1,7 @@
 import assert = require('assert');
 import { LOGGER } from '../Logger';
 
-import { Fleet } from './Fleet'
+import { Fleet } from './Fleet';
 import { Damage } from './Damage';
 import { Weapon } from './Weapon';
 import { Hull } from './Hull';
@@ -91,7 +91,8 @@ export class Ship implements Simulatable {
             return null;
         } else {
             const ships = Array.from(fleet.getShips());
-            return ships[hit % ships.length] as Ship;
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            return ships[hit % ships.length]!;
         }
     }
 
@@ -118,15 +119,14 @@ export class Ship implements Simulatable {
             for (let shot = 0; shot < this._weapon.shots; shot++) {
                 this.shotAt(fleet, shot);
             }
-            return true
+            return true;
         } else {
             return false;
         }
     }
 
-
     public toString(): string {
-        return `Ship{hull:${this._hull},shield:${this._shield},weapon:${this._weapon},fleet:${this._fleet}}`
+        return `Ship{hull:${this._hull},shield:${this._shield},weapon:${this._weapon},fleet:${this._fleet}}`;
     }
 }
 

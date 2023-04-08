@@ -10,6 +10,7 @@ export const DefenseTypes = {
         return ALL.length;
     },
     random: function (): DefenseType {
-        return ALL[Utils.randomInt(0, ALL.length - 1)] as DefenseType;
-    }
-}
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return ALL[Utils.randomInt(0, ALL.length - 1)]!;
+    },
+};
