@@ -28,7 +28,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
     public update(deltaTime: Ticks): void {
         this._everyXTicks.update(deltaTime);
     }
-    public toString(): string {
+    public override toString(): string {
         return `SimpleShield{hp:${this.hp}/${this.maxHp},type:${this.defenseType},regenRate:${this._regenerationRate}}`;
     }
 }

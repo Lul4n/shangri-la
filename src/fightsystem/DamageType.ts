@@ -10,7 +10,7 @@ export const DamageTypes = {
         return ALL.length;
     },
     random: function (): DamageType {
-        return ALL[Utils.randomInt(0, ALL.length - 1)];
+        return ALL[Utils.randomInt(0, ALL.length - 1)] as DamageType;
     }
 }
 

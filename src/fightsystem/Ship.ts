@@ -91,7 +91,7 @@ export class Ship implements Simulatable {
             return null;
         } else {
             const ships = Array.from(fleet.getShips());
-            return ships[hit % ships.length];
+            return ships[hit % ships.length] as Ship;
         }
     }
 

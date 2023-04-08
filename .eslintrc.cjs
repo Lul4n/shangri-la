@@ -1,7 +1,7 @@
 module.exports = {
     env: {
-      browser: true,
-      ES2022: true
+        browser: true,
+        ES2022: true
     },
     extends: [
         "eslint:recommended",
@@ -20,8 +20,8 @@ module.exports = {
     },
     ignorePatterns: ['*.js'],
     root: true,
-    rules:{
-        'quotes': [ 'error', 'single' ],
+    rules: {
+        'quotes': ['error', 'single'],
 
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-interface': 'off',

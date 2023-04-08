@@ -10,6 +10,6 @@ export const DefenseTypes = {
         return ALL.length;
     },
     random: function (): DefenseType {
-        return ALL[Utils.randomInt(0, ALL.length - 1)];
+        return ALL[Utils.randomInt(0, ALL.length - 1)] as DefenseType;
     }
 }

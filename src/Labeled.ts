@@ -23,7 +23,7 @@ export function Labeled<TBase extends Constructor>(Base: TBase) {
         getLabel(): string | null {
             return this.label;
         }
-        toString(): string {
+        override toString(): string {
             return super.toString() + `@{label:${this.label}}`
         }
     };
