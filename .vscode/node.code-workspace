@@ -13,11 +13,11 @@
 		"terminal.integrated.scrollback": 100000,
 		"eslint.format.enable": true,
 		"eslint.run": "onSave",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"eslint.validate": ["typescript"],
 		"genGetSet.scanOnSave": true,
 		"genGetSet.spacedImportLine": true
-	},
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.validate": ["typescript"]
+	}
 }

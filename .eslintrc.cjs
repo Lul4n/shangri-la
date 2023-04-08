@@ -21,6 +21,8 @@ module.exports = {
     ignorePatterns: ["*.js"],
     root: true,
     rules:{
+        "quotes": [ "error", "single" ],
+
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/no-useless-constructor': 'off',
