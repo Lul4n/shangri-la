@@ -18,10 +18,10 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module'
     },
-    ignorePatterns: ["*.js"],
+    ignorePatterns: ['*.js'],
     root: true,
     rules:{
-        "quotes": [ "error", "single" ],
+        'quotes': [ 'error', 'single' ],
 
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
