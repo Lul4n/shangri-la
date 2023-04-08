@@ -49,7 +49,7 @@ export class ImmutableResourceAmount implements ResourceAmount {
 
     public multiply(factor: number | bigint): ImmutableResourceAmount {
         assert(factor >= 0);
-        let bigIntFactor;
+        let bigIntFactor: bigint;
         if (typeof factor === 'number') {
             bigIntFactor = BigInt(factor);
         } else {
