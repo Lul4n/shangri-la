@@ -13,7 +13,7 @@
             ],
             "console": "integratedTerminal",
             "outputCapture": "console",
-            "program": "out/main.js",
+            "program": "dist/index.js",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"

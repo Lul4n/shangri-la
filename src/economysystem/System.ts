@@ -4,7 +4,6 @@ import { Planet } from './Planet';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { Coordinates } from '../Coordinates';
-import { LOGGER } from '../Logger';
 import { Labeled } from '../Labeled';
 
 export class System implements Simulatable {
@@ -28,7 +27,6 @@ export class System implements Simulatable {
 
     public update(deltaTime: Ticks) {
         this._planets.forEach((p) => p.update(deltaTime));
-        LOGGER.info('%s', this);
     }
 
     public toString(): string {

@@ -1,12 +1,14 @@
 import * as Utils from '../Utils';
 
 import { Fleet } from './Fleet';
-import { LOGGER } from '../Logger';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
+import { loggerFactory } from '../Logger';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
+
+const LOGGER = loggerFactory('Battle');
 
 export class Battle implements Simulatable {
     private readonly _everyXTicks: EveryXTicks;
@@ -45,7 +47,7 @@ export class Battle implements Simulatable {
             return;
         }
         this._round++;
-        LOGGER.info(`Round ${this._round}: ${this._attacker} vs. ${this._defender}`);
+        LOGGER.trace('Round %s: %s vs. %s', this._round, this._attacker, this._defender);
 
         const ordered = this.determineParticipantOrder();
         ordered[0].attack(ordered[1]);

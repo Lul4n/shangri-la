@@ -1,8 +1,10 @@
-import { LOGGER } from '../Logger';
+import { loggerFactory } from '../Logger';
 import { Ship } from './Ship';
 import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
+
+const LOGGER = loggerFactory('Fleet');
 
 export class Fleet implements Simulatable {
     private readonly _ships: Set<Ship> = new Set<Ship>();
@@ -18,7 +20,7 @@ export class Fleet implements Simulatable {
         if (!this._ships.has(ship)) {
             this._ships.add(ship);
             ship.join(this);
-            LOGGER.debug(`${this} is joined by ${ship}`);
+            LOGGER.debug('%s is joined by %s', this, ship);
             return true;
         }
         return false;
@@ -27,7 +29,7 @@ export class Fleet implements Simulatable {
         if (this._ships.has(ship)) {
             this._ships.delete(ship);
             ship.leave(this);
-            LOGGER.debug(`${this} is left by ${ship}`);
+            LOGGER.debug('%s is left by %s', this, ship);
             return true;
         } else {
             return false;
@@ -41,7 +43,7 @@ export class Fleet implements Simulatable {
     }
 
     public attack(other: Fleet) {
-        LOGGER.trace(`${this} is going to attack ${other}`);
+        LOGGER.trace('%s is going to attack %s', this, other);
         this._ships.forEach((ship) => {
             ship.attack(other);
         });

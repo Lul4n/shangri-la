@@ -2,9 +2,11 @@ import assert = require('assert');
 import { DefenseType } from './DefenseType';
 import { Shield } from './Shield';
 import { SimpleDestroyable } from './SimpleDestroyable';
-import { LOGGER } from '../Logger';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
+import { loggerFactory } from '../Logger';
+
+const LOGGER = loggerFactory('SimpleShield');
 
 export class SimpleShield extends SimpleDestroyable implements Shield {
     private readonly _regenerationRate: number;
@@ -20,7 +22,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
     private regenerate() {
         const newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
         if (this.hp !== newHp) {
-            LOGGER.info(`${this} is regenerating ${newHp - this.hp}hp`);
+            LOGGER.trace('%s is regenerating %s hp', this, newHp - this.hp);
             this.hp = newHp;
         }
     }
