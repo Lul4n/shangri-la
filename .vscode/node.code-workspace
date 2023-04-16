@@ -6,7 +6,7 @@
     ],
     "settings": {
         "files.exclude": {
-            "dist/**/*.js": true,
+            "dist/**/*.js": false,
             "dist/**/*.js.map": true
         },
         "debug.terminal.clearBeforeReusing": true,
