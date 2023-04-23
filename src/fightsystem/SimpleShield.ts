@@ -16,7 +16,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
         super(hp, defenseType);
         assert(regenerationRate >= 0);
         this._regenerationRate = regenerationRate;
-        this._everyXTicks = new EveryXTicks(3n, () => this.regenerate());
+        this._everyXTicks = new EveryXTicks(3, () => this.regenerate());
     }
 
     private regenerate() {

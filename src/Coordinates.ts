@@ -1,3 +1,3 @@
-export type Coordinates = [bigint, bigint, bigint];
+export type Coordinates = [number, number, number];
 
-export const ORIGIN: Coordinates = [0n, 0n, 0n];
+export const ORIGIN: Coordinates = [0, 0, 0];

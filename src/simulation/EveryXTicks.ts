@@ -10,10 +10,10 @@ export class EveryXTicks implements Simulatable {
     constructor(x: Ticks, callback: () => void) {
         assert(x > 0);
         this._x = x;
-        this._ticks = 0n;
+        this._ticks = 0;
         this._callback = callback;
     }
-    public get x(): bigint {
+    public get x(): Ticks {
         return this._x;
     }
 

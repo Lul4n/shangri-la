@@ -6,8 +6,22 @@ import { Labeled } from '../Labeled';
 
 const LOGGER = loggerFactory('Fleet');
 
-export class Fleet implements Simulatable {
+export class Fleet implements Simulatable, Labeled {
     private readonly _ships: Set<Ship> = new Set<Ship>();
+    private _label: string | null;
+
+    constructor(label?: string) {
+        this._label = label ? label : null;
+    }
+    public get label(): string | null {
+        return this._label;
+    }
+    public set label(label: string | null) {
+        this._label = label ? label : null;
+    }
+    public hasLabel(): boolean {
+        return this._label ? true : false;
+    }
 
     public getShips(): Set<Ship> {
         return this._ships;
@@ -50,8 +64,6 @@ export class Fleet implements Simulatable {
     }
 
     public toString(): string {
-        return `Fleet{ships:${this._ships.size}}`;
+        return `Fleet{ships:${this._ships.size},label:${this._label}}`;
     }
 }
-
-export const LabeledFleet = Labeled(Fleet);

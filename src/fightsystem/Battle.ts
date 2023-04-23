@@ -14,16 +14,16 @@ export class Battle implements Simulatable {
     private readonly _everyXTicks: EveryXTicks;
     private readonly _attacker: Fleet;
     private readonly _defender: Fleet;
-    private readonly _maxRounds: bigint;
-    private _round: bigint = 0n;
+    private readonly _maxRounds: number;
+    private _round: number = 0;
     private _result: BattleResult;
 
-    constructor(attacker: Fleet, defender: Fleet, maxRounds: bigint) {
-        this._everyXTicks = new EveryXTicks(10n, () => this.calculateRound());
+    constructor(attacker: Fleet, defender: Fleet, maxRounds: number) {
+        this._everyXTicks = new EveryXTicks(10, () => this.calculateRound());
         this._attacker = attacker;
         this._defender = defender;
         this._maxRounds = maxRounds;
-        this._round = 0n;
+        this._round = 0;
         this._result = 'OPEN';
     }
 

@@ -8,7 +8,7 @@ const LOGGER = loggerFactory('Simulation');
 
 export class Simulation implements Simulatable {
     private readonly _parts: Simulatable[] = [];
-    private _currentTick: Ticks = 0n;
+    private _currentTick: Ticks = 0;
     private _scheduledTask: ScheduledTask | null = null;
 
     public get currentTick() {
@@ -44,7 +44,7 @@ export class Simulation implements Simulatable {
     public update() {
         const start = performance.now();
         this._currentTick++;
-        this._parts.forEach((s) => s.update(1n));
+        this._parts.forEach((s) => s.update(1));
         const end = performance.now();
         LOGGER.trace('%s: calculated tick %s in %sms', this, this._currentTick, end - start);
     }

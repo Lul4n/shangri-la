@@ -1,15 +1,31 @@
+import { Labeled } from '../Labeled';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
+import { ResourceAmount } from './ResourceAmount';
 import { ResourceInventory } from './ResourceInventory';
 import { Structure } from './Structure';
-import { Labeled } from '../Labeled';
 
-export class Planet implements Simulatable {
+export class Planet implements Simulatable, Labeled {
     private readonly _structures: Structure[] = [];
     private readonly _resources: ResourceInventory;
+    private _label: string | null;
 
-    constructor() {
+    constructor(label?: string) {
         this._resources = new ResourceInventory();
+        this._label = label ? label : null;
+    }
+    public get label(): string | null {
+        return this._label;
+    }
+    public set label(label: string | null) {
+        this._label = label;
+    }
+    public hasLabel(): boolean {
+        return this._label ? true : false;
+    }
+
+    public get resources(): ResourceAmount {
+        return this._resources.toResourceAmount();
     }
 
     public build(structure: Structure) {
@@ -24,8 +40,6 @@ export class Planet implements Simulatable {
     }
 
     public toString(): string {
-        return `Planet{resources:${this._resources},structures:${this._structures}}`;
+        return `Planet{resources:${this._resources},structures:${this._structures},label:${this._label}}`;
     }
 }
-
-export const LabeledPlanet = Labeled(Planet);

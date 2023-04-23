@@ -1,7 +1,114 @@
-export interface ResourceAmount {
-    get carbon(): bigint;
-    get metal(): bigint;
-    get silicon(): bigint;
-    get synthetics(): bigint;
-    get propellant(): bigint;
+import assert = require('assert');
+
+export class ResourceAmount {
+    public static carbon(carbon: number): ResourceAmount {
+        return new ResourceAmount(carbon, 0, 0, 0, 0);
+    }
+    public static metal(metal: number): ResourceAmount {
+        return new ResourceAmount(0, metal, 0, 0, 0);
+    }
+    public static silicon(silicon: number): ResourceAmount {
+        return new ResourceAmount(0, 0, silicon, 0, 0);
+    }
+    public static synthetics(synthetics: number): ResourceAmount {
+        return new ResourceAmount(0, 0, 0, synthetics, 0);
+    }
+    public static propellant(propellant: number): ResourceAmount {
+        return new ResourceAmount(0, 0, 0, 0, propellant);
+    }
+    public static copyFrom(copyFrom: ResourceAmount): ResourceAmount {
+        return new ResourceAmount(copyFrom.carbon, copyFrom.metal, copyFrom.silicon, copyFrom.synthetics, copyFrom.propellant);
+    }
+    private readonly _carbon: number;
+    private readonly _metal: number;
+    private readonly _silicon: number;
+    private readonly _synthetics: number;
+    private readonly _propellant: number;
+
+    constructor(carbon: number, metal: number, silicon: number, synthetics: number, propellant: number) {
+        assert(carbon >= 0);
+        assert(metal >= 0);
+        assert(silicon >= 0);
+        assert(synthetics >= 0);
+        assert(propellant >= 0);
+
+        this._carbon = carbon;
+        this._metal = metal;
+        this._silicon = silicon;
+        this._synthetics = synthetics;
+        this._propellant = propellant;
+    }
+
+    public multiply(factor: number): ResourceAmount {
+        assert(factor >= 0);
+        let numberFactor: number;
+        if (typeof factor === 'number') {
+            numberFactor = Number(factor);
+        } else {
+            numberFactor = factor;
+        }
+        return new ResourceAmount(this._carbon * numberFactor, this._metal * numberFactor, this._silicon * numberFactor, this._synthetics * numberFactor, this._propellant * numberFactor);
+    }
+
+    public get carbon(): number {
+        return this._carbon;
+    }
+    public get metal(): number {
+        return this._metal;
+    }
+    public get silicon(): number {
+        return this._silicon;
+    }
+    public get synthetics(): number {
+        return this._synthetics;
+    }
+    public get propellant(): number {
+        return this._propellant;
+    }
+    public withCarbon(carbon: number): ResourceAmount {
+        assert(carbon >= 0);
+        if (carbon != this._carbon) {
+            return new ResourceAmount(carbon, this._metal, this._silicon, this.synthetics, this._propellant);
+        } else {
+            return this;
+        }
+    }
+    public withMetal(metal: number): ResourceAmount {
+        assert(metal >= 0);
+        if (metal != this._metal) {
+            return new ResourceAmount(this._carbon, metal, this._silicon, this.synthetics, this._propellant);
+        } else {
+            return this;
+        }
+    }
+    public withSilicon(silicon: number): ResourceAmount {
+        assert(silicon >= 0);
+        if (silicon != this._silicon) {
+            return new ResourceAmount(this._carbon, this._metal, silicon, this.synthetics, this._propellant);
+        } else {
+            return this;
+        }
+    }
+    public withSynthetics(synthetics: number): ResourceAmount {
+        assert(synthetics >= 0);
+        if (synthetics != this._synthetics) {
+            return new ResourceAmount(this._carbon, this._metal, this._silicon, synthetics, this._propellant);
+        } else {
+            return this;
+        }
+    }
+    public withPropellant(propellant: number): ResourceAmount {
+        assert(propellant >= 0);
+        if (propellant != this._propellant) {
+            return new ResourceAmount(this._carbon, this._metal, this._silicon, this.synthetics, propellant);
+        } else {
+            return this;
+        }
+    }
+
+    public toString(): string {
+        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`;
+    }
 }
+
+export const NOTHING: ResourceAmount = new ResourceAmount(0, 0, 0, 0, 0);

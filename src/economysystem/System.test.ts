@@ -1,19 +1,25 @@
 import { expect, test } from '@jest/globals';
-import { LabeledSystem } from './System';
+import { System } from './System';
 import { ORIGIN } from '../Coordinates';
-import { TEST_EARTH, TEST_JUPITER, TEST_MARS, TEST_MERKUR, TEST_SATURN, TEST_URANUS, TEST_VENUS } from './Planet.test';
+import { testEarth, testJupiter, testMars, testMercury, testSaturn, testUranus, testVenus } from './Planet.test';
 
-export const TEST_SOLARSYSTEM = new LabeledSystem(ORIGIN);
-TEST_SOLARSYSTEM.setLabel('SOLARSYSTEM');
-TEST_SOLARSYSTEM.addPlanet(TEST_MERKUR);
-TEST_SOLARSYSTEM.addPlanet(TEST_VENUS);
-TEST_SOLARSYSTEM.addPlanet(TEST_EARTH);
-TEST_SOLARSYSTEM.addPlanet(TEST_MARS);
-TEST_SOLARSYSTEM.addPlanet(TEST_JUPITER);
-TEST_SOLARSYSTEM.addPlanet(TEST_SATURN);
-TEST_SOLARSYSTEM.addPlanet(TEST_URANUS);
+export function testSolarsystem(): System {
+    const system = new System(ORIGIN, 'Solarsystem');
+    system.addPlanet(testMercury());
+    system.addPlanet(testVenus());
+    system.addPlanet(testEarth());
+    system.addPlanet(testMars());
+    system.addPlanet(testJupiter());
+    system.addPlanet(testSaturn());
+    system.addPlanet(testUranus());
+    return system;
+}
 
-test('basic', () => {
-    const underTest = TEST_SOLARSYSTEM;
-    expect(underTest.coordinates[0]).toBe(0n);
+describe('System', () => {
+    describe('Labels', () => {
+        test('basic', () => {
+            const underTest = testSolarsystem();
+            expect(underTest.coordinates[0]).toBe(0);
+        });
+    });
 });

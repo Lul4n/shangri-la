@@ -6,15 +6,26 @@ import { Ticks } from '../simulation/Ticks';
 import { Coordinates } from '../Coordinates';
 import { Labeled } from '../Labeled';
 
-export class System implements Simulatable {
+export class System implements Simulatable, Labeled {
     private readonly _coordinates: Coordinates;
     private readonly _planets: Planet[] = [];
+    private _label: string | null;
 
-    constructor(coordinates: Coordinates) {
+    constructor(coordinates: Coordinates, label?: string) {
         assert(coordinates[0] >= 0, `invalid x coordinate ${coordinates[0]}`);
         assert(coordinates[1] >= 0, `invalid y coordinate ${coordinates[1]}`);
         assert(coordinates[2] >= 0, `invalid z coordinate ${coordinates[2]}`);
         this._coordinates = coordinates;
+        this._label = label ? label : null;
+    }
+    public get label(): string | null {
+        return this._label;
+    }
+    public set label(label: string | null) {
+        this._label = label ? label : null;
+    }
+    public hasLabel(): boolean {
+        return this._label ? true : false;
     }
 
     public get coordinates(): Coordinates {
@@ -30,7 +41,6 @@ export class System implements Simulatable {
     }
 
     public toString(): string {
-        return `System{planets:${this._planets}}`;
+        return `System{planets:${this._planets},label:${this._label}}`;
     }
 }
-export const LabeledSystem = Labeled(System);

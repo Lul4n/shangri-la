@@ -1,21 +1,84 @@
-import { LabeledPlanet } from './Planet';
+import { Planet } from './Planet';
+import { NOTHING } from './ResourceAmount';
+import { testArcFurnace, testCoalMine, testRefinery, testSteelWorks } from './Structure.test';
 
-export const TEST_MERKUR = new LabeledPlanet();
-TEST_MERKUR.setLabel('MERKUR');
-export const TEST_VENUS = new LabeledPlanet();
-TEST_VENUS.setLabel('VENUS');
-export const TEST_EARTH = new LabeledPlanet();
-TEST_EARTH.setLabel('EARTH');
-export const TEST_MARS = new LabeledPlanet();
-TEST_MARS.setLabel('MARS');
-export const TEST_JUPITER = new LabeledPlanet();
-TEST_JUPITER.setLabel('JUPITER');
-export const TEST_SATURN = new LabeledPlanet();
-TEST_SATURN.setLabel('SATURN');
-export const TEST_URANUS = new LabeledPlanet();
-TEST_URANUS.setLabel('URANUS');
+export function testMercury() {
+    const planet = new Planet('Mercury');
+    return planet;
+}
+export function testVenus() {
+    const planet = new Planet('Venus');
+    return planet;
+}
+export function testEarth() {
+    const planet = new Planet('Earth');
+    planet.build(testCoalMine());
+    planet.build(testSteelWorks());
+    planet.build(testArcFurnace());
+    planet.build(testRefinery());
+    planet.update(1);
+    return planet;
+}
+export function testMars() {
+    const planet = new Planet('Mars');
+    return planet;
+}
+export function testJupiter() {
+    const planet = new Planet('Jupiter');
+    return planet;
+}
+export function testSaturn() {
+    const planet = new Planet('Saturn');
+    return planet;
+}
+export function testUranus() {
+    const planet = new Planet('Uranus');
+    return planet;
+}
+export function unnamed() {
+    return new Planet();
+}
 
-test('basic', () => {
-    const underTest = TEST_EARTH;
-    expect(underTest.getLabel()).toBe('EARTH');
+describe('Planet', () => {
+    describe('Resources', () => {
+        test('Uranus starts with nothing at all', () => {
+            const underTest = testUranus();
+            expect(underTest.resources).toMatchObject(NOTHING);
+        });
+        test('Earth starts with a bit of everything', () => {
+            const underTest = testEarth();
+            expect(underTest.resources.carbon).toBe(100);
+            expect(underTest.resources.metal).toBe(100);
+            expect(underTest.resources.silicon).toBe(100);
+            expect(underTest.resources.synthetics).toBe(80);
+            expect(underTest.resources.propellant).toBe(20);
+        });
+    });
+    describe('Labels', () => {
+        test('label can be set via constructor', () => {
+            const underTest = new Planet('XYZ');
+            expect(underTest.hasLabel()).toBe(true);
+            expect(underTest.label).toBe('XYZ');
+        });
+        test('label must not be set via constructor', () => {
+            const underTest = unnamed();
+            expect(underTest.hasLabel()).toBe(false);
+            expect(underTest.label).toBeNull();
+        });
+        test('label can be changed', () => {
+            const underTest = testEarth();
+            expect(underTest.hasLabel()).toBe(true);
+            expect(underTest.label).not.toBeNull();
+            expect(underTest.label).not.toBe('Proxyma Earth');
+            underTest.label = 'Proxyma Earth';
+            expect(underTest.label).toBe('Proxyma Earth');
+        });
+        test('label can be unset', () => {
+            const underTest = testEarth();
+            expect(underTest.hasLabel()).toBe(true);
+            expect(underTest.label).not.toBeNull();
+            underTest.label = null;
+            expect(underTest.label).toBeNull();
+        });
+    });
 });

@@ -12,17 +12,28 @@ import { loggerFactory } from '../Logger';
 
 const LOGGER = loggerFactory('Ship');
 
-export class Ship implements Simulatable {
+export class Ship implements Simulatable, Labeled {
     private _fleet: Fleet | null;
     private _shield: Shield;
     private _hull: Hull;
     private _weapon: Weapon;
+    private _label: string | null;
 
-    constructor(hull: Hull, shield: Shield, weapon: Weapon) {
+    constructor(hull: Hull, shield: Shield, weapon: Weapon, label?: string) {
         this._fleet = null;
         this._shield = shield;
         this._hull = hull;
         this._weapon = weapon;
+        this._label = label ? label : null;
+    }
+    public get label(): string | null {
+        return this._label;
+    }
+    public set label(label: string | null) {
+        this._label = label ? label : null;
+    }
+    public hasLabel(): boolean {
+        return this._label ? true : false;
     }
 
     public join(fleet: Fleet): boolean {
@@ -128,8 +139,6 @@ export class Ship implements Simulatable {
     }
 
     public toString(): string {
-        return `Ship{hull:${this._hull},shield:${this._shield},weapon:${this._weapon},fleet:${this._fleet}}`;
+        return `Ship{hull:${this._hull},shield:${this._shield},weapon:${this._weapon},fleet:${this._fleet},label:${this._label}}`;
     }
 }
-
-export const LabeledShip = Labeled(Ship);
