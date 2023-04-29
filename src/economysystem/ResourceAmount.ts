@@ -2,7 +2,7 @@ import assert = require('assert');
 import { HasResources } from './HasResources';
 import { ToStringHelper } from '../ToStringHelper';
 
-export class ResourceAmount implements HasResources{
+export class ResourceAmount implements HasResources {
     public static carbon(carbon: number): ResourceAmount {
         return new ResourceAmount(carbon, 0, 0, 0, 0);
     }
@@ -112,7 +112,7 @@ export class ResourceAmount implements HasResources{
         }
     }
 
-    protected toStringHelper(): ToStringHelper{
+    protected toStringHelper(): ToStringHelper {
         return ToStringHelper.toStringHelper(this)
             .omnitNullValues()
             .add('carbon', this.carbon)

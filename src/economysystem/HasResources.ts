@@ -1,6 +1,4 @@
-
-export interface HasResources{
-
+export interface HasResources {
     isNothing(): boolean;
     get carbon(): number;
     get metal(): number;

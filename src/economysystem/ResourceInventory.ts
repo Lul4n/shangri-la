@@ -3,7 +3,7 @@ import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');
 
-export class ResourceInventory implements HasResources{
+export class ResourceInventory implements HasResources {
     private _carbon: number = 0;
     private _metal: number = 0;
     private _silicon: number = 0;
@@ -77,12 +77,7 @@ export class ResourceInventory implements HasResources{
         this.propellant += amount.propellant;
     }
     public subtract(amount: ResourceAmount): boolean {
-        if (this.carbon >= amount.carbon 
-            && this.metal >= amount.metal 
-            && this.silicon >= amount.silicon 
-            && this.synthetics >= amount.synthetics 
-            && this.propellant >= amount.propellant
-        ) {
+        if (this.carbon >= amount.carbon && this.metal >= amount.metal && this.silicon >= amount.silicon && this.synthetics >= amount.synthetics && this.propellant >= amount.propellant) {
             this.carbon -= amount.carbon;
             this.metal -= amount.metal;
             this.silicon -= amount.silicon;
@@ -98,7 +93,7 @@ export class ResourceInventory implements HasResources{
         return new ResourceAmount(this.carbon, this.metal, this.silicon, this.synthetics, this.propellant);
     }
 
-    protected toStringHelper(): ToStringHelper{
+    protected toStringHelper(): ToStringHelper {
         return ToStringHelper.toStringHelper(this)
             .add('carbon', this.carbon)
             .add('metal', this.metal)

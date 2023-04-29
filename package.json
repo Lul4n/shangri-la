@@ -2,7 +2,7 @@
   "scripts": {
     "clean": "npx rimraf dist/",
     "preformat": "npm run clean",
-    "format": "npx prettier",
+    "format": "npx prettier --write src/**",
     "prelint": "npm run format",
     "lint": "npx eslint",
     "prebuild": "npm run lint",

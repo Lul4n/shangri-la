@@ -5,6 +5,7 @@ import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { Coordinates } from '../Coordinates';
 import { Labeled } from '../Labeled';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class System implements Simulatable, Labeled {
     private readonly _coordinates: Coordinates;
@@ -39,8 +40,12 @@ export class System implements Simulatable, Labeled {
     public update(deltaTime: Ticks) {
         this._planets.forEach((p) => p.update(deltaTime));
     }
-
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this)
+            .add('label', this.label)
+            .add('planets', this._planets);
+    }
     public toString(): string {
-        return `System{planets:${this._planets},label:${this._label}}`;
+        return this.toStringHelper().toString();
     }
 }

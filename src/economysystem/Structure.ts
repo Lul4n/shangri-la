@@ -3,6 +3,7 @@ import { ResourceProduction } from './ResourceProduction';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');
 import { Labeled } from '../Labeled';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class Structure implements ResourceProduction, Labeled {
     private _baseProduction: ResourceAmount;
@@ -36,7 +37,14 @@ export class Structure implements ResourceProduction, Labeled {
         return this._baseProduction.multiply(this._level * deltaTime);
     }
 
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this)
+            .add('label', this.label)
+            .add('level', this.level)
+            .add('baseProduction', this._baseProduction);
+    }
+
     public toString(): string {
-        return `Structure{level:${this._level},baseProduction:${this._baseProduction},label:${this._label}}`;
+        return this.toStringHelper.toString();
     }
 }

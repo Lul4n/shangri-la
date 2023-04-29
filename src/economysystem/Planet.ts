@@ -1,4 +1,5 @@
 import { Labeled } from '../Labeled';
+import { ToStringHelper } from '../ToStringHelper';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { HasResources } from './HasResources';
@@ -16,7 +17,6 @@ export class Planet implements Simulatable, Labeled {
         this._label = label ? label : null;
     }
 
-
     public get label(): string | null {
         return this._label;
     }
@@ -30,7 +30,7 @@ export class Planet implements Simulatable, Labeled {
     public get resources(): ResourceAmount {
         return this._resources.toResourceAmount();
     }
-    public get resourceCapacity() : HasResources{
+    public get resourceCapacity(): HasResources {
         return this._resources.capacity;
     }
 
@@ -44,8 +44,14 @@ export class Planet implements Simulatable, Labeled {
             this._resources.add(production);
         });
     }
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this)
+            .add('label', this.label)
+            .add('resources', this.resources)
+            .add('structures', this._structures);
+    }
 
     public toString(): string {
-        return `Planet{resources:${this._resources},structures:${this._structures},label:${this._label}}`;
+        return this.toStringHelper.toString();
     }
 }
