@@ -1,6 +1,8 @@
 import assert = require('assert');
+import { HasResources } from './HasResources';
+import { ToStringHelper } from '../ToStringHelper';
 
-export class ResourceAmount {
+export class ResourceAmount implements HasResources{
     public static carbon(carbon: number): ResourceAmount {
         return new ResourceAmount(carbon, 0, 0, 0, 0);
     }
@@ -37,6 +39,10 @@ export class ResourceAmount {
         this._silicon = silicon;
         this._synthetics = synthetics;
         this._propellant = propellant;
+    }
+
+    public isNothing(): boolean {
+        return this.carbon === 0 && this.metal === 0 && this.silicon === 0 && this.synthetics === 0 && this.propellant === 0;
     }
 
     public multiply(factor: number): ResourceAmount {
@@ -106,8 +112,18 @@ export class ResourceAmount {
         }
     }
 
+    protected toStringHelper(): ToStringHelper{
+        return ToStringHelper.toStringHelper(this)
+            .omnitNullValues()
+            .add('carbon', this.carbon)
+            .add('metal', this.metal)
+            .add('silicon', this.silicon)
+            .add('synthetics', this.synthetics)
+            .add('propellant', this.propellant);
+    }
+
     public toString(): string {
-        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`;
+        return this.toStringHelper().toString();
     }
 }
 

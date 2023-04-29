@@ -1,7 +1,9 @@
+import { ToStringHelper } from '../ToStringHelper';
+import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');
 
-export class ResourceInventory {
+export class ResourceInventory implements HasResources{
     private _carbon: number = 0;
     private _metal: number = 0;
     private _silicon: number = 0;
@@ -9,7 +11,7 @@ export class ResourceInventory {
     private _propellant: number = 0;
 
     public isNothing(): boolean {
-        return this._carbon === 0 && this._metal === 0 && this._silicon === 0 && this._synthetics === 0 && this._propellant === 0;
+        return this.carbon === 0 && this.metal === 0 && this.silicon === 0 && this.synthetics === 0 && this.propellant === 0;
     }
     public set carbon(carbon: number) {
         assert(carbon >= 0);
@@ -20,7 +22,7 @@ export class ResourceInventory {
     }
     public addCarbon(carbon: number) {
         assert(carbon >= 0);
-        this._carbon += carbon;
+        this.carbon += carbon;
     }
     public get metal(): number {
         return this._metal;
@@ -31,7 +33,7 @@ export class ResourceInventory {
     }
     public addMetal(metal: number) {
         assert(metal >= 0);
-        this._metal += metal;
+        this.metal += metal;
     }
     public get silicon(): number {
         return this._silicon;
@@ -42,7 +44,7 @@ export class ResourceInventory {
     }
     public addSilicon(silicon: number) {
         assert(silicon >= 0);
-        this._silicon += silicon;
+        this.silicon += silicon;
     }
     public get synthetics(): number {
         return this._synthetics;
@@ -53,7 +55,7 @@ export class ResourceInventory {
     }
     public addSynthetics(synthetics: number) {
         assert(synthetics >= 0);
-        this._synthetics += synthetics;
+        this.synthetics += synthetics;
     }
     public get propellant(): number {
         return this._propellant;
@@ -64,23 +66,28 @@ export class ResourceInventory {
     }
     public addPropellant(propellant: number) {
         assert(propellant >= 0);
-        this._propellant += propellant;
+        this.propellant += propellant;
     }
 
     public add(amount: ResourceAmount) {
-        this._carbon += amount.carbon;
-        this._metal += amount.metal;
-        this._silicon += amount.silicon;
-        this._synthetics += amount.synthetics;
-        this._propellant += amount.propellant;
+        this.carbon += amount.carbon;
+        this.metal += amount.metal;
+        this.silicon += amount.silicon;
+        this.synthetics += amount.synthetics;
+        this.propellant += amount.propellant;
     }
     public subtract(amount: ResourceAmount): boolean {
-        if (this._carbon >= amount.carbon && this._metal >= amount.metal && this._silicon >= amount.silicon && this._synthetics >= amount.synthetics && this._propellant >= amount.propellant) {
-            this._carbon -= amount.carbon;
-            this._metal -= amount.metal;
-            this._silicon -= amount.silicon;
-            this._synthetics -= amount.synthetics;
-            this._propellant -= amount.propellant;
+        if (this.carbon >= amount.carbon 
+            && this.metal >= amount.metal 
+            && this.silicon >= amount.silicon 
+            && this.synthetics >= amount.synthetics 
+            && this.propellant >= amount.propellant
+        ) {
+            this.carbon -= amount.carbon;
+            this.metal -= amount.metal;
+            this.silicon -= amount.silicon;
+            this.synthetics -= amount.synthetics;
+            this.propellant -= amount.propellant;
             return true;
         } else {
             return false;
@@ -88,10 +95,19 @@ export class ResourceInventory {
     }
 
     public toResourceAmount(): ResourceAmount {
-        return new ResourceAmount(this._carbon, this._metal, this._silicon, this._synthetics, this._propellant);
+        return new ResourceAmount(this.carbon, this.metal, this.silicon, this.synthetics, this.propellant);
+    }
+
+    protected toStringHelper(): ToStringHelper{
+        return ToStringHelper.toStringHelper(this)
+            .add('carbon', this.carbon)
+            .add('metal', this.metal)
+            .add('silicon', this.silicon)
+            .add('synthetics', this.synthetics)
+            .add('propellant', this.propellant);
     }
 
     public toString(): string {
-        return `{carbon:${this._carbon},metal:${this._metal},silicon:${this._silicon},synthetics:${this._synthetics},propellant:${this._propellant}}`;
+        return this.toStringHelper().toString();
     }
 }

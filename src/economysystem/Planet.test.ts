@@ -1,5 +1,6 @@
 import { Planet } from './Planet';
 import { NOTHING } from './ResourceAmount';
+import { testArcFurnaceProduction, testCoalMineProduction, testRefineryProduction, testSteelWorksProduction } from './ResourceAmount.test';
 import { testArcFurnace, testCoalMine, testRefinery, testSteelWorks } from './Structure.test';
 
 export function testMercury() {
@@ -16,7 +17,6 @@ export function testEarth() {
     planet.build(testSteelWorks());
     planet.build(testArcFurnace());
     planet.build(testRefinery());
-    planet.update(1);
     return planet;
 }
 export function testMars() {
@@ -41,17 +41,19 @@ export function unnamed() {
 
 describe('Planet', () => {
     describe('Resources', () => {
-        test('Uranus starts with nothing at all', () => {
-            const underTest = testUranus();
+        test('Earth starts with nothing at all', () => {
+            const underTest = testEarth();
             expect(underTest.resources).toMatchObject(NOTHING);
         });
-        test('Earth starts with a bit of everything', () => {
+        test('Earth produces according to expectations after n ticks', () => {
+            const n = 3;
             const underTest = testEarth();
-            expect(underTest.resources.carbon).toBe(100);
-            expect(underTest.resources.metal).toBe(100);
-            expect(underTest.resources.silicon).toBe(100);
-            expect(underTest.resources.synthetics).toBe(80);
-            expect(underTest.resources.propellant).toBe(20);
+            underTest.update(n);
+            expect(underTest.resources.carbon).toBe(testCoalMineProduction().carbon * n);
+            expect(underTest.resources.metal).toBe(testSteelWorksProduction().metal * n);
+            expect(underTest.resources.silicon).toBe(testArcFurnaceProduction().silicon * n);
+            expect(underTest.resources.synthetics).toBe(testRefineryProduction().synthetics * n);
+            expect(underTest.resources.propellant).toBe(testRefineryProduction().propellant * n);
         });
     });
     describe('Labels', () => {

@@ -1,19 +1,22 @@
 import { Labeled } from '../Labeled';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
+import { HasResources } from './HasResources';
+import { LimitedResourceInventory } from './LimitedResourceInventory';
 import { ResourceAmount } from './ResourceAmount';
-import { ResourceInventory } from './ResourceInventory';
 import { Structure } from './Structure';
 
 export class Planet implements Simulatable, Labeled {
     private readonly _structures: Structure[] = [];
-    private readonly _resources: ResourceInventory;
+    private readonly _resources: LimitedResourceInventory;
     private _label: string | null;
 
     constructor(label?: string) {
-        this._resources = new ResourceInventory();
+        this._resources = LimitedResourceInventory.ofCapacity(1000);
         this._label = label ? label : null;
     }
+
+
     public get label(): string | null {
         return this._label;
     }
@@ -26,6 +29,9 @@ export class Planet implements Simulatable, Labeled {
 
     public get resources(): ResourceAmount {
         return this._resources.toResourceAmount();
+    }
+    public get resourceCapacity() : HasResources{
+        return this._resources.capacity;
     }
 
     public build(structure: Structure) {
