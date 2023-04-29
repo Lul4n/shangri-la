@@ -1,6 +1,7 @@
 import assert = require('assert');
 import { Simulatable } from './Simulatable';
 import { Ticks } from './Ticks';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class EveryXTicks implements Simulatable {
     private readonly _x: Ticks;
@@ -25,5 +26,11 @@ export class EveryXTicks implements Simulatable {
         for (let time = 0; time < timesX; time++) {
             this._callback();
         }
+    }
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('x', this.x).add('ticks', this._ticks);
+    }
+    public toString(): string {
+        return this.toStringHelper().toString();
     }
 }

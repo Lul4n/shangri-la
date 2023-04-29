@@ -41,9 +41,7 @@ export class System implements Simulatable, Labeled {
         this._planets.forEach((p) => p.update(deltaTime));
     }
     protected toStringHelper(): ToStringHelper {
-        return ToStringHelper.toStringHelper(this)
-            .add('label', this.label)
-            .add('planets', this._planets);
+        return ToStringHelper.toStringHelper(this).add('label', this.label).add('planets', this._planets);
     }
     public toString(): string {
         return this.toStringHelper().toString();

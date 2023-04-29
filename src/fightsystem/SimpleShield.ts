@@ -5,6 +5,7 @@ import { SimpleDestroyable } from './SimpleDestroyable';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
 import { loggerFactory } from '../Logger';
+import { ToStringHelper } from '../ToStringHelper';
 
 const LOGGER = loggerFactory('SimpleShield');
 
@@ -30,7 +31,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
     public update(deltaTime: Ticks): void {
         this._everyXTicks.update(deltaTime);
     }
-    public override toString(): string {
-        return `SimpleShield{hp:${this.hp}/${this.maxHp},type:${this.defenseType},regenRate:${this._regenerationRate}}`;
+    protected override toStringHelper(): ToStringHelper {
+        return super.toStringHelper().add('regenerationRate', this._regenerationRate);
     }
 }

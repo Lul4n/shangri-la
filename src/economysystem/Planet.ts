@@ -45,10 +45,7 @@ export class Planet implements Simulatable, Labeled {
         });
     }
     protected toStringHelper(): ToStringHelper {
-        return ToStringHelper.toStringHelper(this)
-            .add('label', this.label)
-            .add('resources', this.resources)
-            .add('structures', this._structures);
+        return ToStringHelper.toStringHelper(this).add('label', this.label).add('resources', this.resources).add('structures', this._structures);
     }
 
     public toString(): string {

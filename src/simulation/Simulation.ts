@@ -3,6 +3,7 @@ import { Simulatable } from './Simulatable';
 import { Ticks } from './Ticks';
 import assert = require('assert');
 import { loggerFactory } from '../Logger';
+import { ToStringHelper } from '../ToStringHelper';
 
 const LOGGER = loggerFactory('Simulation');
 
@@ -49,7 +50,10 @@ export class Simulation implements Simulatable {
         LOGGER.trace('%s: calculated tick %s in %sms', this, this._currentTick, end - start);
     }
 
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('currentTick', this._currentTick).add('parts', this._parts.length);
+    }
     public toString(): string {
-        return `Simulation{currentTick:${this._currentTick},parts:${this._parts.length}}`;
+        return this.toStringHelper().toString();
     }
 }

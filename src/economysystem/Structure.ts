@@ -34,14 +34,11 @@ export class Structure implements ResourceProduction, Labeled {
     }
 
     public produce(deltaTime: Ticks): ResourceAmount {
-        return this._baseProduction.multiply(this._level * deltaTime);
+        return this._baseProduction.multiply(this.level * deltaTime);
     }
 
     protected toStringHelper(): ToStringHelper {
-        return ToStringHelper.toStringHelper(this)
-            .add('label', this.label)
-            .add('level', this.level)
-            .add('baseProduction', this._baseProduction);
+        return ToStringHelper.toStringHelper(this).add('label', this.label).add('level', this.level).add('baseProduction', this._baseProduction);
     }
 
     public toString(): string {

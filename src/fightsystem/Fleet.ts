@@ -3,6 +3,7 @@ import { Ship } from './Ship';
 import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { Labeled } from '../Labeled';
+import { ToStringHelper } from '../ToStringHelper';
 
 const LOGGER = loggerFactory('Fleet');
 
@@ -63,7 +64,10 @@ export class Fleet implements Simulatable, Labeled {
         });
     }
 
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('label', this.label).add('ships', this._ships.size);
+    }
     public toString(): string {
-        return `Fleet{ships:${this._ships.size},label:${this._label}}`;
+        return this.toStringHelper().toString();
     }
 }

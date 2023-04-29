@@ -3,6 +3,7 @@ import { DefenseType } from './DefenseType';
 import { Destroyable } from './Destroyable';
 import { Damage } from './Damage';
 import { lookupDamageCoefficiant } from './DamageCoefficiants';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class SimpleDestroyable implements Destroyable {
     private readonly _maxHp: number;
@@ -54,5 +55,12 @@ export class SimpleDestroyable implements Destroyable {
     }
     public isDestroyed(): boolean {
         return this._hp <= 0;
+    }
+
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('hp', this.hp).add('maxHp', this.maxHp).add('defenseType', this.defenseType);
+    }
+    public toString(): string {
+        return this.toStringHelper().toString();
     }
 }

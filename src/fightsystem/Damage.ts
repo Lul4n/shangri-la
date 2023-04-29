@@ -1,5 +1,6 @@
 import assert = require('assert');
 import { DamageType } from './DamageType';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class Damage {
     private static readonly NO_DAMAGE = new Damage(0.0, 'NONE');
@@ -35,8 +36,10 @@ export class Damage {
     public getValue(): number {
         return this._value;
     }
-
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('type', this._dType).value(this._value);
+    }
     public toString(): string {
-        return `Damage{value:${this._value},type:${this._dType}}`;
+        return this.toStringHelper().toString();
     }
 }

@@ -5,6 +5,7 @@ import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
 import { loggerFactory } from '../Logger';
+import { ToStringHelper } from '../ToStringHelper';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 
@@ -66,5 +67,11 @@ export class Battle implements Simulatable {
         } else {
             this._result = 'OPEN';
         }
+    }
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this).add('round', this._round).add('maxRounds', this._maxRounds);
+    }
+    public toString(): string {
+        return this.toStringHelper().toString();
     }
 }

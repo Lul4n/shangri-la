@@ -3,6 +3,7 @@ import assert = require('assert');
 import { DamageType } from './DamageType';
 import { Weapon } from './Weapon';
 import { Damage } from './Damage';
+import { ToStringHelper } from '../ToStringHelper';
 
 export class SimpleWeapon implements Weapon {
     private readonly _damageValue: number;
@@ -35,7 +36,15 @@ export class SimpleWeapon implements Weapon {
     public attack(): Damage {
         return new Damage(this._damageValue, this._damageType);
     }
+    protected toStringHelper(): ToStringHelper {
+        return ToStringHelper.toStringHelper(this)
+            .add('value', this._damageValue)
+            .add('type', this._damageType)
+            .add('shots', this._shots)
+            .add('targets', this._targets)
+            .add('splashCoefficiant', this._splashCoefficiant);
+    }
     public toString(): string {
-        return `SimpleWeapon{damage:${this._damageValue},type:${this._damageType},shots:${this._shots},targets:${this._targets},splash:${this._splashCoefficiant}}`;
+        return this.toStringHelper().toString();
     }
 }
