@@ -1,4 +1,14 @@
 export class ToStringHelper {
+    private static formatValue(value: unknown): string | null {
+        if (value === null || value === undefined) {
+            return null;
+        } else if (Array.isArray(value)) {
+            return `[${value}]`;
+        } else {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string
+            return `${value}`;
+        }
+    }
     public static toStringHelper(source: unknown): ToStringHelper {
         if (!source) {
             return new ToStringHelper('');
@@ -28,13 +38,11 @@ export class ToStringHelper {
     }
 
     public value(value: unknown): this {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        this._values.push(value ? `${value}` : null);
+        this._values.push(ToStringHelper.formatValue(value));
         return this;
     }
     public add(key: string, value: unknown): this {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        this._properties[key] = value ? `${value}` : null;
+        this._properties[key] = ToStringHelper.formatValue(value);
         return this;
     }
 

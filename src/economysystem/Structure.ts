@@ -42,6 +42,6 @@ export class Structure implements ResourceProduction, Labeled {
     }
 
     public toString(): string {
-        return this.toStringHelper.toString();
+        return this.toStringHelper().toString();
     }
 }

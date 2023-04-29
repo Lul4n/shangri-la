@@ -54,6 +54,7 @@ describe('Planet', () => {
             expect(underTest.resources.silicon).toBe(testArcFurnaceProduction().silicon * n);
             expect(underTest.resources.synthetics).toBe(testRefineryProduction().synthetics * n);
             expect(underTest.resources.propellant).toBe(testRefineryProduction().propellant * n);
+            console.log(underTest.toString());
         });
     });
     describe('Labels', () => {
