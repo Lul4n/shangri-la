@@ -10,6 +10,13 @@ export class ResourceInventory implements HasResources {
     private _synthetics: number = 0;
     private _propellant: number = 0;
 
+    public clear() {
+        this.carbon = 0;
+        this.metal = 0;
+        this.silicon = 0;
+        this.synthetics = 0;
+        this.propellant = 0;
+    }
     public isNothing(): boolean {
         return this.carbon === 0 && this.metal === 0 && this.silicon === 0 && this.synthetics === 0 && this.propellant === 0;
     }

@@ -1,5 +1,11 @@
 import { ToStringHelper } from './ToStringHelper';
 
+class Test {
+    public toString(): string {
+        return ToStringHelper.toStringHelper(this).add('123', '456').toString();
+    }
+}
+
 describe('ToStringHelper', () => {
     describe('created from null', () => {
         const underTest = ToStringHelper.toStringHelper(null);
@@ -51,9 +57,13 @@ describe('ToStringHelper', () => {
             underTest.reset().value(false);
             expect(underTest.toString()).toBe('{false}');
         });
-        test('with value {} results in {{}}', () => {
+        test('with value {} results in {[object Object]}', () => {
             underTest.reset().value({});
-            expect(underTest.toString()).toBe('{{}}');
+            expect(underTest.toString()).toBe('{[object Object]}');
+        });
+        test('with value new Test() results in {Test{123:456}}', () => {
+            underTest.reset().value(new Test());
+            expect(underTest.toString()).toBe('{Test{123:456}}');
         });
         test("with values false and true and properties a=123 and b='abc' results in {a:123,b:abc,false,true}", () => {
             underTest.reset().value(false).value(true).add('a', 123).add('b', 'abc');
@@ -113,6 +123,10 @@ describe('ToStringHelper', () => {
         test('with no properties results in XYZ{}', () => {
             underTest.reset();
             expect(underTest.toString()).toBe('XYZ{}');
+        });
+        test('with object property that uses ToStringHelper results in XYZ{abc:Test{123:456}}', () => {
+            underTest.reset().add('abc', new Test());
+            expect(underTest.toString()).toBe('XYZ{abc:Test{123:456}}');
         });
     });
 });
