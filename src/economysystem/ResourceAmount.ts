@@ -18,7 +18,7 @@ export class ResourceAmount implements HasResources {
     public static propellant(propellant: number): ResourceAmount {
         return new ResourceAmount(0, 0, 0, 0, propellant);
     }
-    public static copyFrom(copyFrom: ResourceAmount): ResourceAmount {
+    public static copyFrom(copyFrom: HasResources): ResourceAmount {
         return new ResourceAmount(copyFrom.carbon, copyFrom.metal, copyFrom.silicon, copyFrom.synthetics, copyFrom.propellant);
     }
     private readonly _carbon: number;

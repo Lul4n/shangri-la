@@ -43,19 +43,19 @@ export class LimitedResourceInventory extends ResourceInventory {
     }
 
     public get levelCarbon(): number {
-        return this.carbon / this.maxCarbon;
+        return this.maxCarbon > 0 ? this.carbon / this.maxCarbon : 1;
     }
     public get levelMetal(): number {
-        return this.metal / this.maxMetal;
+        return this.maxMetal > 0 ? this.metal / this.maxMetal : 1;
     }
     public get levelSilicon(): number {
-        return this.silicon / this.maxSilicon;
+        return this.maxSilicon > 0 ? this.silicon / this.maxSilicon : 1;
     }
     public get levelSynthetics(): number {
-        return this.synthetics / this.maxSynthetics;
+        return this.maxSynthetics > 0 ? this.synthetics / this.maxSynthetics : 1;
     }
     public get levelPropellant(): number {
-        return this.propellant / this.maxPropellant;
+        return this.maxPropellant ? this.propellant / this.maxPropellant : 1;
     }
 
     public set maxCarbon(carbon: number) {
