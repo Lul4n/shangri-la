@@ -26,5 +26,75 @@ describe('LimitedResourceInventory', () => {
             expect(underTest.levelSynthetics).toBe(0);
             expect(underTest.levelPropellant).toBe(0);
         });
+
+        test('Carbon can be filled by adding capacity', () => {
+            underTest.clear();
+            underTest.addCarbon(capacity);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelCarbon).toBe(1);
+        });
+        test('Carbon can be filled to more than 100%', () => {
+            underTest.clear();
+            underTest.addCarbon(capacity + 1);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelCarbon).toBe(1);
+            expect(underTest.carbon).toBe(capacity);
+        });
+
+        test('Metal can be filled by adding capacity', () => {
+            underTest.clear();
+            underTest.addMetal(capacity);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelMetal).toBe(1);
+        });
+        test('Metal can be filled to more than 100%', () => {
+            underTest.clear();
+            underTest.addMetal(capacity + 1);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelMetal).toBe(1);
+            expect(underTest.metal).toBe(capacity);
+        });
+
+        test('Silicon can be filled by adding capacity', () => {
+            underTest.clear();
+            underTest.addSilicon(capacity);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelSilicon).toBe(1);
+        });
+        test('Silicon can be filled to more than 100%', () => {
+            underTest.clear();
+            underTest.addSilicon(capacity + 1);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelSilicon).toBe(1);
+            expect(underTest.silicon).toBe(capacity);
+        });
+
+        test('Synthetics can be filled by adding capacity', () => {
+            underTest.clear();
+            underTest.addSynthetics(capacity);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelSynthetics).toBe(1);
+        });
+        test('Synthetics can be filled to more than 100%', () => {
+            underTest.clear();
+            underTest.addSynthetics(capacity + 1);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelSynthetics).toBe(1);
+            expect(underTest.synthetics).toBe(capacity);
+        });
+
+        test('Propellant can be filled by adding capacity', () => {
+            underTest.clear();
+            underTest.addPropellant(capacity);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelPropellant).toBe(1);
+        });
+        test('Propellant can be filled to more than 100%', () => {
+            underTest.clear();
+            underTest.addPropellant(capacity + 1);
+            expect(underTest.isNothing()).toBe(false);
+            expect(underTest.levelPropellant).toBe(1);
+            expect(underTest.propellant).toBe(capacity);
+        });
     });
 });
