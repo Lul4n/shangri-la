@@ -1,8 +1,8 @@
-import assert from 'assert';
 import { ResourceInventory } from './ResourceInventory';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 import { ToStringHelper } from '../ToStringHelper';
+import assert = require('assert');
 
 export class LimitedResourceInventory extends ResourceInventory {
     public static zero(): LimitedResourceInventory {
@@ -74,7 +74,7 @@ export class LimitedResourceInventory extends ResourceInventory {
     }
     public set maxSilicon(silicon: number) {
         assert(silicon >= 0);
-        this.maxSilicon = silicon;
+        this._maxSilicon = silicon;
     }
     public get maxSilicon(): number {
         return this._maxSilicon;
