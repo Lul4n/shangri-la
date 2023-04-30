@@ -15,12 +15,13 @@ module.exports = {
     ignorePatterns: ['*.js'],
     root: true,
     rules: {
-        quotes: ['error', 'single'],
+        quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
 
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/no-useless-constructor': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
+        '@typescript-eslint/no-useless-escape': 'off',
 
         '@typescript-eslint/no-unused-vars': 'error',
     },

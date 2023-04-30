@@ -47,13 +47,7 @@ export class ResourceAmount implements HasResources {
 
     public multiply(factor: number): ResourceAmount {
         assert(factor >= 0);
-        let numberFactor: number;
-        if (typeof factor === 'number') {
-            numberFactor = Number(factor);
-        } else {
-            numberFactor = factor;
-        }
-        return new ResourceAmount(this._carbon * numberFactor, this._metal * numberFactor, this._silicon * numberFactor, this._synthetics * numberFactor, this._propellant * numberFactor);
+        return new ResourceAmount(this._carbon * factor, this._metal * factor, this._silicon * factor, this._synthetics * factor, this._propellant * factor);
     }
 
     public get carbon(): number {

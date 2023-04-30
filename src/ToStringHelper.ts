@@ -32,6 +32,12 @@ export class ToStringHelper {
         this._omnitNullValues = omnitNullValues;
     }
 
+    public reset(): this{
+        this._values= [];
+        this._properties={};
+        return this;
+    }
+
     public omnitNullValues(omnitNullValues: boolean = true): this {
         this._omnitNullValues = omnitNullValues;
         return this;
