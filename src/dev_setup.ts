@@ -8,6 +8,7 @@ import { Simulation } from './simulation/Simulation';
 import * as Utils from './Utils';
 import { ORIGIN } from './Coordinates';
 import { ResourceAmount } from './economysystem/ResourceAmount';
+import { StructureBlueprint } from './economysystem/StructureBlueprint';
 
 export function devSetup(simulation: Simulation) {
     const factory1 = new ShipFactory('red');
@@ -29,7 +30,8 @@ export function devSetup(simulation: Simulation) {
 
     const s1 = new System(ORIGIN, 'Sonnensystem');
     const p1 = new Planet('Erde');
-    const b1 = new Structure(ResourceAmount.carbon(1), 'Kohlemine');
+    const bb1 = new StructureBlueprint(ResourceAmount.carbon(1), 'Kohlemine');
+    const b1 = new Structure(bb1);
     p1.build(b1);
     s1.addPlanet(p1);
     simulation.addPart(s1);

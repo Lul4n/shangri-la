@@ -109,6 +109,7 @@ export class ResourceInventory implements HasResources {
 
     protected toStringHelper(): ToStringHelper {
         return ToStringHelper.toStringHelper(this)
+            .omnitFalsishValues()
             .add('carbon', this.carbon)
             .add('metal', this.metal)
             .add('silicon', this.silicon)

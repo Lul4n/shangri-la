@@ -2,26 +2,19 @@ import { Ticks } from '../simulation/Ticks';
 import { ResourceProduction } from './ResourceProduction';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');
-import { Labeled } from '../Labeled';
 import { ToStringHelper } from '../ToStringHelper';
+import { StructureBlueprint } from './StructureBlueprint';
 
-export class Structure implements ResourceProduction, Labeled {
-    private _baseProduction: ResourceAmount;
+export class Structure implements ResourceProduction {
+    private _blueprint: StructureBlueprint;
     private _level: number = 1;
-    private _label: string | null;
 
-    constructor(baseProduction: ResourceAmount, label?: string) {
-        this._baseProduction = ResourceAmount.copyFrom(baseProduction);
-        this._label = label ? label : null;
+    constructor(blueprint: StructureBlueprint) {
+        this._blueprint = blueprint;
     }
+
     public get label(): string | null {
-        return this._label;
-    }
-    public set label(label: string | null) {
-        this._label = label ? label : null;
-    }
-    public hasLabel(): boolean {
-        return this._label ? true : false;
+        return this._blueprint.label;
     }
 
     public set level(level: number) {
@@ -34,11 +27,11 @@ export class Structure implements ResourceProduction, Labeled {
     }
 
     public produce(deltaTime: Ticks): ResourceAmount {
-        return this._baseProduction.multiply(this.level * deltaTime);
+        return this._blueprint.baseProduction.multiply(this.level * deltaTime);
     }
 
     protected toStringHelper(): ToStringHelper {
-        return ToStringHelper.toStringHelper(this).add('label', this.label).add('level', this.level).add('baseProduction', this._baseProduction);
+        return ToStringHelper.toStringHelper(this).add('blueprint', this._blueprint).add('level', this.level);
     }
 
     public toString(): string {

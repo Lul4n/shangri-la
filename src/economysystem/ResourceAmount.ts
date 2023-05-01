@@ -108,7 +108,7 @@ export class ResourceAmount implements HasResources {
 
     protected toStringHelper(): ToStringHelper {
         return ToStringHelper.toStringHelper(this)
-            .omnitNullValues()
+            .omnitFalsishValues()
             .add('carbon', this.carbon)
             .add('metal', this.metal)
             .add('silicon', this.silicon)

@@ -129,4 +129,89 @@ describe('ToStringHelper', () => {
             expect(underTest.toString()).toBe('XYZ{abc:Test{123:456}}');
         });
     });
+    describe('omnitNullValues', () => {
+        test('supresses null values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().value(null);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses null properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().add('a', null);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('does not suppress false values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().value(false);
+            expect(underTest.toString()).toBe('{false}');
+        });
+        test('does not suppress false properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().add('a', false);
+            expect(underTest.toString()).toBe('{a:false}');
+        });
+        test('does not suppress zero values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().value(0);
+            expect(underTest.toString()).toBe('{0}');
+        });
+        test('does not suppress zero properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().add('a', 0);
+            expect(underTest.toString()).toBe('{a:0}');
+        });
+        test('does not suppress empty string values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().value('');
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('does not suppress empty string properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitNullValues().add('a', '');
+            expect(underTest.toString()).toBe('{a:}');
+        });
+    });
+    describe('omnitFalsish', () => {
+        test('supresses null values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value(null);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses null properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', null);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses false values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value(false);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses false properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', false);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses zero values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value(0);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses zero properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', 0);
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses empty string values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value('');
+            expect(underTest.toString()).toBe('{}');
+        });
+        test('supresses empty string properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', '');
+            expect(underTest.toString()).toBe('{}');
+        });
+
+        test('does not supress 1 as value', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value(1);
+            expect(underTest.toString()).toBe('{1}');
+        });
+        test('does not supress 1 as property', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', 1);
+            expect(underTest.toString()).toBe('{a:1}');
+        });
+        test('does not supress blank string values', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().value(' ');
+            expect(underTest.toString()).toBe('{ }');
+        });
+        test('does not supress blank string properties', () => {
+            const underTest = ToStringHelper.toStringHelper().omnitFalsishValues().add('a', ' ');
+            expect(underTest.toString()).toBe('{a: }');
+        });
+    });
 });
