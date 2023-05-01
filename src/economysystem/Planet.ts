@@ -19,7 +19,7 @@ export class Planet implements Simulatable, Labeled {
     constructor(size: PlanetSize, label?: string) {
         assert(size >= 0);
         this._size = size;
-        this._resources = LimitedResourceInventory.ofCapacity(1000);
+        this._resources = LimitedResourceInventory.ofCapacity(size);
         this._label = label ? label : null;
     }
 
