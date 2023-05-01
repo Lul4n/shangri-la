@@ -29,7 +29,8 @@ const systemLogger = pino.pino(
     },
     transport
 );
-export function loggerFactory(name: string): pino.Logger<pino.LoggerOptions> {
+
+function loggerForName(name: string): pino.Logger<pino.LoggerOptions> {
     if (!loggersByName[name]) {
         loggersByName[name] = pino.pino(
             {
@@ -41,4 +42,18 @@ export function loggerFactory(name: string): pino.Logger<pino.LoggerOptions> {
         systemLogger.info('created logger: %s', name);
     }
     return loggersByName[name]!;
+}
+
+export function loggerFactory(source: unknown): pino.Logger<pino.LoggerOptions> {
+    if (typeof source === 'string') {
+        return loggerForName(source);
+    } else if (!source) {
+        return systemLogger;
+    } else if (typeof source === 'function') {
+        return loggerForName(source.name);
+    } else if (typeof source === 'object') {
+        return loggerForName(source.constructor.name);
+    } else {
+        return loggerForName(`${source}`);
+    }
 }
