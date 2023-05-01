@@ -65,6 +65,15 @@ describe('Planet', () => {
             expect(underTest.resources.synthetics).toBe(testRefineryProduction().synthetics * n);
             expect(underTest.resources.propellant).toBe(testRefineryProduction().propellant * n);
         });
+        test('Earth cannot exceed its resource capacity', () => {
+            const underTest = testEarth();
+            underTest.update(1000);
+            expect(underTest.resources.carbon).toBe(underTest.resourceCapacity.carbon);
+            expect(underTest.resources.metal).toBe(underTest.resourceCapacity.metal);
+            expect(underTest.resources.silicon).toBe(underTest.resourceCapacity.silicon);
+            expect(underTest.resources.synthetics).toBe(underTest.resourceCapacity.synthetics);
+            expect(underTest.resources.propellant).toBe(underTest.resourceCapacity.propellant);
+        });
     });
     describe('Labels', () => {
         test('label can be set via constructor', () => {
