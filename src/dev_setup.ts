@@ -29,7 +29,7 @@ export function devSetup(simulation: Simulation) {
     simulation.addPart(battle);
 
     const s1 = new System(ORIGIN, 'Sonnensystem');
-    const p1 = new Planet('Erde');
+    const p1 = new Planet(100, 'Erde');
     const bb1 = new StructureBlueprint(ResourceAmount.carbon(1), 'Kohlemine');
     const b1 = new Structure(bb1);
     p1.build(b1);

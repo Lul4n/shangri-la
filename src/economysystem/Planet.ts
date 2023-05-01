@@ -1,3 +1,4 @@
+import assert = require('assert');
 import { Labeled } from '../Labeled';
 import { ToStringHelper } from '../ToStringHelper';
 import { Simulatable } from '../simulation/Simulatable';
@@ -7,16 +8,24 @@ import { LimitedResourceInventory } from './LimitedResourceInventory';
 import { ResourceAmount } from './ResourceAmount';
 import { Structure } from './Structure';
 
+export type PlanetSize = number;
+
 export class Planet implements Simulatable, Labeled {
     private readonly _structures: Structure[] = [];
     private readonly _resources: LimitedResourceInventory;
     private _label: string | null;
+    private _size: PlanetSize;
 
-    constructor(label?: string) {
+    constructor(size: PlanetSize, label?: string) {
+        assert(size >= 0);
+        this._size = size;
         this._resources = LimitedResourceInventory.ofCapacity(1000);
         this._label = label ? label : null;
     }
 
+    public get size(): PlanetSize {
+        return this._size;
+    }
     public get label(): string | null {
         return this._label;
     }
