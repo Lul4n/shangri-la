@@ -1,5 +1,5 @@
 import assert = require('assert');
-import { Labeled } from '../Labeled';
+import { HasLabel } from '../HasLabel';
 import { ToStringHelper } from '../ToStringHelper';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
@@ -13,9 +13,8 @@ import { loggerFactory } from '../Logger';
 
 export type PlanetSize = number;
 
-const LOGGER = loggerFactory('Planet');
-
-export class Planet implements Simulatable, Labeled {
+export class Planet implements Simulatable, HasLabel {
+    private static readonly LOGGER = loggerFactory(Planet);
     private readonly _structures: Structure[] = [];
     private readonly _resources: LimitedResourceInventory;
     private readonly _structureBuildingQueue: StructureConstructionQueue;
@@ -54,7 +53,7 @@ export class Planet implements Simulatable, Labeled {
         if (structure instanceof Structure) {
             this._structures.push(structure);
         } else if (structure instanceof StructureBlueprint) {
-            LOGGER.debug('not implemented yet');
+            Planet.LOGGER.debug('not implemented yet');
         }
     }
 

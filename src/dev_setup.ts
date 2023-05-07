@@ -7,8 +7,7 @@ import { ShipFactory } from './fightsystem/ShipFactory';
 import { Simulation } from './simulation/Simulation';
 import * as Utils from './Utils';
 import { ORIGIN } from './Coordinates';
-import { ResourceAmount } from './economysystem/ResourceAmount';
-import { StructureBlueprint } from './economysystem/StructureBlueprint';
+import { BLUEPRINT_ARC_FURNACE, BLUEPRINT_COAL_MINE, BLUEPRINT_REFINERY, BLUEPRINT_STEEL_WORKS } from './economysystem/StructureBlueprints';
 
 export function devSetup(simulation: Simulation) {
     const factory1 = new ShipFactory('red');
@@ -30,9 +29,10 @@ export function devSetup(simulation: Simulation) {
 
     const s1 = new System(ORIGIN, 'Sonnensystem');
     const p1 = new Planet(100, 'Erde');
-    const bb1 = new StructureBlueprint(ResourceAmount.carbon(1), 'Kohlemine');
-    const b1 = new Structure(bb1);
-    p1.build(b1);
+    p1.build(new Structure(BLUEPRINT_COAL_MINE));
+    p1.build(new Structure(BLUEPRINT_STEEL_WORKS));
+    p1.build(new Structure(BLUEPRINT_ARC_FURNACE));
+    p1.build(new Structure(BLUEPRINT_REFINERY));
     s1.addPlanet(p1);
     simulation.addPart(s1);
 }

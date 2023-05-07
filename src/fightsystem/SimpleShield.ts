@@ -7,9 +7,8 @@ import { EveryXTicks } from '../simulation/EveryXTicks';
 import { loggerFactory } from '../Logger';
 import { ToStringHelper } from '../ToStringHelper';
 
-const LOGGER = loggerFactory('SimpleShield');
-
 export class SimpleShield extends SimpleDestroyable implements Shield {
+    private static readonly LOGGER = loggerFactory(SimpleShield);
     private readonly _regenerationRate: number;
     private readonly _everyXTicks: EveryXTicks;
 
@@ -23,7 +22,7 @@ export class SimpleShield extends SimpleDestroyable implements Shield {
     private regenerate() {
         const newHp = Math.min(this.maxHp, this.hp + this._regenerationRate);
         if (this.hp !== newHp) {
-            LOGGER.trace('%s is regenerating %s hp', this, newHp - this.hp);
+            SimpleShield.LOGGER.trace('%s is regenerating %s hp', this, newHp - this.hp);
             this.hp = newHp;
         }
     }

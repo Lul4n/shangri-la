@@ -1,14 +1,22 @@
-import { Labeled } from '../Labeled';
+import { HasLabel } from '../HasLabel';
+import { HasUuid, UUID } from '../HasUuid';
 import { ToStringHelper } from '../ToStringHelper';
+import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 
-export class StructureBlueprint implements Labeled {
+export class StructureBlueprint implements HasLabel, HasUuid {
+    private readonly _uuid: UUID;
     private _label: string | null;
     private _baseProduction: ResourceAmount;
 
-    constructor(baseProduction: ResourceAmount, label?: string) {
+    constructor(uuid: UUID, baseProduction: HasResources, label?: string) {
+        this._uuid = uuid;
         this._label = label ? label : null;
         this._baseProduction = ResourceAmount.copyFrom(baseProduction);
+    }
+
+    public get uuid(): UUID {
+        return this._uuid;
     }
 
     public get baseProduction(): ResourceAmount {

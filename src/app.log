@@ -1,1 +1,4 @@
-{"level":30,"time":1682963727155,"pid":25856,"hostname":"Julians-MBP.fro.sti","name":"SYSTEM","msg":"created logger: Planet"}
+{"level":30,"time":1683495388499,"pid":7573,"hostname":"Julians-MBP.fro.sti","name":"SYSTEM","msg":"created logger: StructureConstructionQueue"}
+{"level":30,"time":1683495388504,"pid":7573,"hostname":"Julians-MBP.fro.sti","name":"SYSTEM","msg":"created logger: Planet"}
+{"level":30,"time":1683495388540,"pid":7573,"hostname":"Julians-MBP.fro.sti","name":"StructureConstructionQueue","msg":"3, blueprint => {\n      /* istanbul ignore next */\n      cov_2nwoq09yi6().f[1]++;\n      cov_2nwoq09yi6().s[15]++;\n      return this.build(blueprint);\n    }"}
+{"level":30,"time":1683495388542,"pid":7573,"hostname":"Julians-MBP.fro.sti","name":"StructureConstructionQueue","msg":"1000, blueprint => {\n      /* istanbul ignore next */\n      cov_2nwoq09yi6().f[1]++;\n      cov_2nwoq09yi6().s[15]++;\n      return this.build(blueprint);\n    }"}

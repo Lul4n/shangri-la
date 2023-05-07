@@ -7,13 +7,12 @@ import { Hull } from './Hull';
 import { Shield } from './Shield';
 import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
-import { Labeled } from '../Labeled';
+import { HasLabel } from '../HasLabel';
 import { loggerFactory } from '../Logger';
 import { ToStringHelper } from '../ToStringHelper';
 
-const LOGGER = loggerFactory('Ship');
-
-export class Ship implements Simulatable, Labeled {
+export class Ship implements Simulatable, HasLabel {
+    private static readonly LOGGER = loggerFactory(Ship);
     private _fleet: Fleet | null;
     private _shield: Shield;
     private _hull: Hull;
@@ -42,7 +41,7 @@ export class Ship implements Simulatable, Labeled {
             this.leave(fleet);
             this._fleet = fleet;
             this._fleet.join(this);
-            LOGGER.trace('%s joined %s', this, fleet);
+            Ship.LOGGER.trace('%s joined %s', this, fleet);
             return true;
         } else {
             return false;
@@ -54,7 +53,7 @@ export class Ship implements Simulatable, Labeled {
             const previousFleet = this._fleet;
             this._fleet = null;
             previousFleet.leave(this);
-            LOGGER.trace('%s left %s', this, fleet);
+            Ship.LOGGER.trace('%s left %s', this, fleet);
             return true;
         } else {
             return false;
@@ -64,27 +63,27 @@ export class Ship implements Simulatable, Labeled {
     public take(damage: Damage): Damage {
         const damageDealtToShield: Damage = this._shield.take(damage);
         if (!damageDealtToShield.isNoDamage()) {
-            LOGGER.trace('%s has been dealt to %s', damageDealtToShield, this._shield);
+            Ship.LOGGER.trace('%s has been dealt to %s', damageDealtToShield, this._shield);
         }
         const remainingDamage = damage.decreaseBy(damageDealtToShield);
         if (this._shield.isDestroyed() && !remainingDamage.isNoDamage()) {
             const damageDealtToHull: Damage = this._hull.take(remainingDamage);
             if (!damageDealtToHull.isNoDamage()) {
-                LOGGER.trace('%s has been dealt to %s', damageDealtToHull, this._hull);
+                Ship.LOGGER.trace('%s has been dealt to %s', damageDealtToHull, this._hull);
             }
             if (this._hull.isDestroyed()) {
-                LOGGER.debug('%s has been destroyed', this._hull);
+                Ship.LOGGER.debug('%s has been destroyed', this._hull);
                 this.destroy();
             }
             return remainingDamage.decreaseBy(damageDealtToHull);
         } else {
-            LOGGER.trace('%s has been absorbed by %s', damage, this._shield);
+            Ship.LOGGER.trace('%s has been absorbed by %s', damage, this._shield);
             return remainingDamage;
         }
     }
 
     public destroy(): boolean {
-        LOGGER.trace('%s has been destroyed', this);
+        Ship.LOGGER.trace('%s has been destroyed', this);
         this._shield.destroy();
         this._hull.destroy();
         this._fleet?.leave(this);
@@ -113,7 +112,7 @@ export class Ship implements Simulatable, Labeled {
     private shotAt(fleet: Fleet, shot: number) {
         let d: Damage = this._weapon.attack();
         let remainingTargets: number = this._weapon.targets;
-        LOGGER.trace('%s shoots at %s for the %s time', this, fleet, shot + 1);
+        Ship.LOGGER.trace('%s shoots at %s for the %s time', this, fleet, shot + 1);
         do {
             const target: Ship | null = this.selectTarget(fleet, shot + this._weapon.targets - remainingTargets);
             if (target) {
@@ -129,7 +128,7 @@ export class Ship implements Simulatable, Labeled {
     public attack(fleet: Fleet): boolean {
         assert(!this.isDestroyed());
         if (!fleet.isEmpty()) {
-            LOGGER.trace('%s is going to attack %s', this, fleet);
+            Ship.LOGGER.trace('%s is going to attack %s', this, fleet);
             for (let shot = 0; shot < this._weapon.shots; shot++) {
                 this.shotAt(fleet, shot);
             }

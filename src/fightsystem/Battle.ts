@@ -9,9 +9,8 @@ import { ToStringHelper } from '../ToStringHelper';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 
-const LOGGER = loggerFactory('Battle');
-
 export class Battle implements Simulatable {
+    private static readonly LOGGER = loggerFactory(Battle);
     private readonly _everyXTicks: EveryXTicks;
     private readonly _attacker: Fleet;
     private readonly _defender: Fleet;
@@ -48,7 +47,7 @@ export class Battle implements Simulatable {
             return;
         }
         this._round++;
-        LOGGER.trace('Round %s: %s vs. %s', this._round, this._attacker, this._defender);
+        Battle.LOGGER.trace('Round %s: %s vs. %s', this._round, this._attacker, this._defender);
 
         const ordered = this.determineParticipantOrder();
         ordered[0].attack(ordered[1]);

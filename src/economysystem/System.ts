@@ -4,10 +4,10 @@ import { Planet } from './Planet';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { Coordinates } from '../Coordinates';
-import { Labeled } from '../Labeled';
+import { HasLabel } from '../HasLabel';
 import { ToStringHelper } from '../ToStringHelper';
 
-export class System implements Simulatable, Labeled {
+export class System implements Simulatable, HasLabel {
     private readonly _coordinates: Coordinates;
     private readonly _planets: Planet[] = [];
     private _label: string | null;
