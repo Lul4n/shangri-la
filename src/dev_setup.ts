@@ -33,6 +33,7 @@ export function devSetup(simulation: Simulation) {
     p1.build(new Structure(BLUEPRINT_STEEL_WORKS));
     p1.build(new Structure(BLUEPRINT_ARC_FURNACE));
     p1.build(new Structure(BLUEPRINT_REFINERY));
+
     s1.addPlanet(p1);
     simulation.addPart(s1);
 }

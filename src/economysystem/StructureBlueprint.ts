@@ -1,6 +1,8 @@
+import { assert } from 'console';
 import { HasLabel } from '../HasLabel';
 import { HasUuid, UUID } from '../HasUuid';
 import { ToStringHelper } from '../ToStringHelper';
+import { Ticks } from '../simulation/Ticks';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 
@@ -8,11 +10,16 @@ export class StructureBlueprint implements HasLabel, HasUuid {
     private readonly _uuid: UUID;
     private _label: string | null;
     private _baseProduction: ResourceAmount;
+    private _baseConstructionCosts: ResourceAmount;
+    private _baseConstructionDuration: Ticks;
 
-    constructor(uuid: UUID, baseProduction: HasResources, label?: string) {
+    constructor(uuid: UUID, baseProduction: HasResources, baseConstructionCosts: HasResources, baseConstructionDuration: Ticks, label?: string) {
         this._uuid = uuid;
-        this._label = label ? label : null;
         this._baseProduction = ResourceAmount.copyFrom(baseProduction);
+        this._baseConstructionCosts = ResourceAmount.copyFrom(baseConstructionCosts);
+        this._baseConstructionDuration = baseConstructionDuration;
+        assert(this._baseConstructionDuration > 0);
+        this._label = label ? label : null;
     }
 
     public get uuid(): UUID {
@@ -21,6 +28,12 @@ export class StructureBlueprint implements HasLabel, HasUuid {
 
     public get baseProduction(): ResourceAmount {
         return this._baseProduction;
+    }
+    public get baseConstructionCosts(): ResourceAmount {
+        return this._baseConstructionCosts;
+    }
+    public get baseConstructionDuration(): Ticks {
+        return this._baseConstructionDuration;
     }
 
     public get label(): string | null {

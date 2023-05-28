@@ -10,6 +10,10 @@ export class ResourceInventory implements HasResources {
     private _synthetics: number = 0;
     private _propellant: number = 0;
 
+    public covers(other: HasResources): boolean {
+        return this.carbon >= other.carbon && this.metal >= other.metal && this.silicon >= other.silicon && this.synthetics >= other.synthetics && this.propellant >= other.synthetics;
+    }
+
     public clear(): this {
         this.carbon = 0;
         this.metal = 0;
@@ -82,7 +86,7 @@ export class ResourceInventory implements HasResources {
         return this;
     }
 
-    public add(amount: ResourceAmount): this {
+    public add(amount: HasResources): this {
         this.carbon += amount.carbon;
         this.metal += amount.metal;
         this.silicon += amount.silicon;
@@ -90,13 +94,18 @@ export class ResourceInventory implements HasResources {
         this.propellant += amount.propellant;
         return this;
     }
-    public subtract(amount: ResourceAmount): boolean {
-        if (this.carbon >= amount.carbon && this.metal >= amount.metal && this.silicon >= amount.silicon && this.synthetics >= amount.synthetics && this.propellant >= amount.propellant) {
+    public subtract(amount: HasResources): boolean {
+        if (this.covers(amount)) {
             this.carbon -= amount.carbon;
             this.metal -= amount.metal;
             this.silicon -= amount.silicon;
             this.synthetics -= amount.synthetics;
             this.propellant -= amount.propellant;
+            assert(this.carbon >= 0);
+            assert(this.metal >= 0);
+            assert(this.silicon >= 0);
+            assert(this.synthetics >= 0);
+            assert(this.propellant >= 0);
             return true;
         } else {
             return false;

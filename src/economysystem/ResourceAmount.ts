@@ -3,6 +3,11 @@ import { HasResources } from './HasResources';
 import { ToStringHelper } from '../ToStringHelper';
 
 export class ResourceAmount implements HasResources {
+    public static readonly NOTHING = new ResourceAmount(0, 0, 0, 0, 0);
+    public static readonly ONEHUNDRED: ResourceAmount = new ResourceAmount(100, 100, 100, 100, 100);
+    public static readonly ONETHOUSEND: ResourceAmount = new ResourceAmount(1000, 1000, 1000, 1000, 1000);
+    public static readonly ONEMILLION: ResourceAmount = new ResourceAmount(1000000, 1000000, 1000000, 1000000, 1000000);
+    public static readonly ONEBILLION: ResourceAmount = new ResourceAmount(1000000000, 1000000000, 1000000000, 1000000000, 1000000000);
     public static carbon(carbon: number): ResourceAmount {
         return new ResourceAmount(carbon, 0, 0, 0, 0);
     }
@@ -39,6 +44,9 @@ export class ResourceAmount implements HasResources {
         this._silicon = silicon;
         this._synthetics = synthetics;
         this._propellant = propellant;
+    }
+    public covers(other: HasResources): boolean {
+        return this.carbon >= other.carbon && this.metal >= other.metal && this.silicon >= other.silicon && this.synthetics >= other.synthetics && this.propellant >= other.synthetics;
     }
 
     public isNothing(): boolean {
@@ -120,5 +128,3 @@ export class ResourceAmount implements HasResources {
         return this.toStringHelper().toString();
     }
 }
-
-export const NOTHING: ResourceAmount = new ResourceAmount(0, 0, 0, 0, 0);

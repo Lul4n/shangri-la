@@ -1,7 +1,9 @@
 import { Planet, PlanetSize } from './Planet';
-import { NOTHING } from './ResourceAmount';
+import { ResourceAmount } from './ResourceAmount';
 import { testArcFurnaceProduction, testCoalMineProduction, testRefineryProduction, testSteelWorksProduction } from './ResourceAmount.test';
+import { Structure } from './Structure';
 import { testArcFurnace, testCoalMine, testRefinery, testSteelWorks } from './Structure.test';
+import { BLUEPRINT_COAL_MINE } from './StructureBlueprints';
 
 export const TEST_MERCURY_SIZE: PlanetSize = 100;
 export const TEST_VENUS_SIZE: PlanetSize = 200;
@@ -53,7 +55,7 @@ describe('Planet', () => {
     describe('Resources', () => {
         test('Earth starts with nothing at all', () => {
             const underTest = testEarth();
-            expect(underTest.resources).toMatchObject(NOTHING);
+            expect(underTest.resources).toMatchObject(ResourceAmount.NOTHING);
         });
         test('Earth produces according to expectations after n ticks', () => {
             const n = 3;
@@ -100,6 +102,50 @@ describe('Planet', () => {
             expect(underTest.label).not.toBeNull();
             underTest.label = null;
             expect(underTest.label).toBeNull();
+        });
+    });
+    describe('Construction', () => {
+        test('Construction is not enqueued when insuficiant resources', () => {
+            const underTest = testEarth();
+            underTest.resources.clear();
+            const begunConstruction = underTest.tryConstruction(BLUEPRINT_COAL_MINE);
+            expect(begunConstruction).toBe(false);
+        });
+        test('Construction is enqueued when suficiant resources', () => {
+            const underTest = testEarth();
+            underTest.resources.add(underTest.resourceCapacity);
+
+            const begunConstruction = underTest.tryConstruction(BLUEPRINT_COAL_MINE);
+            expect(begunConstruction).toBe(true);
+            expect(underTest.resources.carbon).toBeLessThan(underTest.resourceCapacity.carbon);
+            expect(underTest.resources.metal).toBeLessThan(underTest.resourceCapacity.metal);
+            expect(underTest.resources.silicon).toBeLessThan(underTest.resourceCapacity.silicon);
+            expect(underTest.resources.synthetics).toBeLessThan(underTest.resourceCapacity.synthetics);
+            expect(underTest.resources.propellant).toBe(underTest.resourceCapacity.propellant);
+
+            console.log(underTest.toString());
+        });
+        test("Structure becomes created after it's construction duration has passed", () => {
+            const underTest = testEarth();
+            underTest.resources.add(underTest.resourceCapacity);
+            underTest.tryConstruction(BLUEPRINT_COAL_MINE);
+
+            expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBeUndefined();
+            underTest.update(BLUEPRINT_COAL_MINE.baseConstructionDuration);
+            expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBe(1);
+            console.log(underTest.toString());
+        });
+        test("Structure becomes upgraded after it's upgrade construction duration has passed", () => {
+            const underTest = testEarth();
+            underTest.resources.add(underTest.resourceCapacity);
+            underTest.build(new Structure(BLUEPRINT_COAL_MINE));
+            expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBe(1);
+
+            underTest.tryConstruction(BLUEPRINT_COAL_MINE);
+            underTest.update(BLUEPRINT_COAL_MINE.baseConstructionDuration * 2);
+
+            expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBe(2);
+            console.log(underTest.toString());
         });
     });
 });

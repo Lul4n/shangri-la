@@ -26,6 +26,10 @@ export class Structure implements ResourceProduction {
         return this._level;
     }
 
+    public get blueprint(): StructureBlueprint {
+        return this._blueprint;
+    }
+
     public produce(deltaTime: Ticks): ResourceAmount {
         return this._blueprint.baseProduction.multiply(this.level * deltaTime);
     }
