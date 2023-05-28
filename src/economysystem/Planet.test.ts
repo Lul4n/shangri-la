@@ -142,7 +142,7 @@ describe('Planet', () => {
             expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBe(1);
 
             underTest.tryConstruction(BLUEPRINT_COAL_MINE);
-            underTest.update(BLUEPRINT_COAL_MINE.baseConstructionDuration * 2);
+            underTest.update(underTest.calculateConstructionDuration(BLUEPRINT_COAL_MINE, 2));
 
             expect(underTest.findStructure(BLUEPRINT_COAL_MINE)?.level).toBe(2);
             console.log(underTest.toString());
