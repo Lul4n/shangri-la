@@ -12,6 +12,7 @@ import { loggerFactory } from '../Logger';
 import { UUID } from '../HasUuid';
 
 export type PlanetSize = number;
+2;
 
 interface Construction {
     blueprint: StructureBlueprint;
@@ -98,27 +99,34 @@ export class Planet implements Simulatable, HasLabel {
         this._structuresByBlueprintUuid[structure.blueprint.uuid] = structure;
     }
 
-    public update(deltaTime: Ticks) {
-        for (let tick = 0; tick < deltaTime; tick++) {
-            const currentConstruction = this._structureConstructionQueue[0];
-            if (this._structureConstructionQueue.length > 0 && currentConstruction) {
-                currentConstruction.remainingDuration -= 1;
-                if (currentConstruction.remainingDuration == 0) {
-                    this._structureConstructionQueue.splice(0, 1);
-                    if (currentConstruction.level == 0) {
-                        this._structuresByBlueprintUuid[currentConstruction.blueprint.uuid] = new Structure(currentConstruction.blueprint);
-                    } else {
-                        const currentStructure = this._structuresByBlueprintUuid[currentConstruction.blueprint.uuid];
-                        assert(currentStructure);
-                        currentStructure.level++;
-                    }
+    private updateSingleTickConstruction() {
+        const currentConstruction = this._structureConstructionQueue[0];
+        if (this._structureConstructionQueue.length > 0 && currentConstruction) {
+            currentConstruction.remainingDuration -= 1;
+            if (currentConstruction.remainingDuration == 0) {
+                this._structureConstructionQueue.splice(0, 1);
+                if (currentConstruction.level == 0) {
+                    this._structuresByBlueprintUuid[currentConstruction.blueprint.uuid] = new Structure(currentConstruction.blueprint);
+                } else {
+                    const currentStructure = this._structuresByBlueprintUuid[currentConstruction.blueprint.uuid];
+                    assert(currentStructure);
+                    currentStructure.level++;
                 }
             }
+        }
+    }
 
-            Object.values(this._structuresByBlueprintUuid).forEach((structure) => {
-                const production = structure.produce(tick);
-                this._resources.add(production);
-            });
+    private updateSingleTickProduction() {
+        Object.values(this._structuresByBlueprintUuid).forEach((structure) => {
+            const production = structure.produce(1);
+            this._resources.add(production);
+        });
+    }
+
+    public update(deltaTime: Ticks) {
+        for (let tick = 0; tick < deltaTime; tick++) {
+            this.updateSingleTickConstruction();
+            this.updateSingleTickProduction();
         }
     }
     protected toStringHelper(): ToStringHelper {
