@@ -1,6 +1,6 @@
 import assert = require('assert');
 import { DamageType } from './DamageType';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class Damage {
     private static readonly NO_DAMAGE = new Damage(0.0, 'NONE');

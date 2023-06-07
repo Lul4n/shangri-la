@@ -1,13 +1,13 @@
-import { Planet } from './economysystem/Planet';
-import { Structure } from './economysystem/Structure';
-import { System } from './economysystem/System';
-import { Battle } from './fightsystem/Battle';
-import { Fleet } from './fightsystem/Fleet';
-import { ShipFactory } from './fightsystem/ShipFactory';
-import { Simulation } from './simulation/Simulation';
+import { Planet } from '../application/domain/economysystem/Planet';
+import { Structure } from '../application/domain/economysystem/Structure';
+import { System } from '../application/domain/economysystem/System';
+import { Battle } from '../application/domain/fightsystem/Battle';
+import { Fleet } from '../application/domain/fightsystem/Fleet';
+import { ShipFactory } from '../application/domain/fightsystem/ShipFactory';
+import { Simulation } from '../application/domain/simulation/Simulation';
 import * as Utils from './Utils';
-import { ORIGIN } from './Coordinates';
-import { BLUEPRINT_ARC_FURNACE, BLUEPRINT_COAL_MINE, BLUEPRINT_REFINERY, BLUEPRINT_STEEL_WORKS } from './economysystem/StructureBlueprints';
+import { ORIGIN } from '../application/domain/Coordinates';
+import { BLUEPRINT_ARC_FURNACE, BLUEPRINT_COAL_MINE, BLUEPRINT_REFINERY, BLUEPRINT_STEEL_WORKS } from '../application/domain/economysystem/StructureBlueprints';
 
 export function devSetup(simulation: Simulation) {
     const factory1 = new ShipFactory('red');

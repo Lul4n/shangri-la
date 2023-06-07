@@ -1,6 +1,6 @@
 import assert = require('assert');
 import { HasResources } from './HasResources';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class ResourceAmount implements HasResources {
     public static readonly NOTHING = new ResourceAmount(0, 0, 0, 0, 0);

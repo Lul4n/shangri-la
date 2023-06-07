@@ -1,7 +1,7 @@
 import { assert } from 'console';
 import { HasLabel } from '../HasLabel';
 import { HasUuid, UUID } from '../HasUuid';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 import { Ticks } from '../simulation/Ticks';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';

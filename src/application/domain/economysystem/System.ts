@@ -5,7 +5,7 @@ import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { Coordinates } from '../Coordinates';
 import { HasLabel } from '../HasLabel';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class System implements Simulatable, HasLabel {
     private readonly _coordinates: Coordinates;

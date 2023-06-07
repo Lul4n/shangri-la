@@ -6,7 +6,7 @@ const transport = pino.transport({
             target: 'pino/file',
             level: 'trace',
             options: {
-                destination: `${__dirname}/../dist/app.log`,
+                destination: `${__dirname}/../../dist/app.log`,
                 append: false,
                 mkdir: true,
             },

@@ -1,9 +1,9 @@
-import { loggerFactory } from '../Logger';
+import { loggerFactory } from '../../../ccc/Logger';
 import { Ship } from './Ship';
 import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { HasLabel } from '../HasLabel';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class Fleet implements Simulatable, HasLabel {
     private static readonly LOGGER = loggerFactory('Fleet');

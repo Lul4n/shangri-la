@@ -2,8 +2,8 @@ import { ScheduledTask, schedule } from 'node-cron';
 import { Simulatable } from './Simulatable';
 import { Ticks } from './Ticks';
 import assert = require('assert');
-import { loggerFactory } from '../Logger';
-import { ToStringHelper } from '../ToStringHelper';
+import { loggerFactory } from '../../../ccc/Logger';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class Simulation implements Simulatable {
     private static readonly LOGGER = loggerFactory(Simulation);

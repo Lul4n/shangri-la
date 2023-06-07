@@ -1,4 +1,4 @@
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');

@@ -4,8 +4,8 @@ import { Shield } from './Shield';
 import { SimpleDestroyable } from './SimpleDestroyable';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
-import { loggerFactory } from '../Logger';
-import { ToStringHelper } from '../ToStringHelper';
+import { loggerFactory } from '../../../ccc/Logger';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class SimpleShield extends SimpleDestroyable implements Shield {
     private static readonly LOGGER = loggerFactory(SimpleShield);

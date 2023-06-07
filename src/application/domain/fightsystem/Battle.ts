@@ -1,11 +1,11 @@
-import * as Utils from '../Utils';
+import * as Utils from '../../../ccc/Utils';
 
 import { Fleet } from './Fleet';
 import { Simulatable } from '../simulation/Simulatable';
 import { Ticks } from '../simulation/Ticks';
 import { EveryXTicks } from '../simulation/EveryXTicks';
-import { loggerFactory } from '../Logger';
-import { ToStringHelper } from '../ToStringHelper';
+import { loggerFactory } from '../../../ccc/Logger';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 

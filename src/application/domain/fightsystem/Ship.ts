@@ -8,8 +8,8 @@ import { Shield } from './Shield';
 import { Ticks } from '../simulation/Ticks';
 import { Simulatable } from '../simulation/Simulatable';
 import { HasLabel } from '../HasLabel';
-import { loggerFactory } from '../Logger';
-import { ToStringHelper } from '../ToStringHelper';
+import { loggerFactory } from '../../../ccc/Logger';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class Ship implements Simulatable, HasLabel {
     private static readonly LOGGER = loggerFactory(Ship);

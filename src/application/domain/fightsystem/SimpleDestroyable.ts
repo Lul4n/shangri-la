@@ -3,7 +3,7 @@ import { DefenseType } from './DefenseType';
 import { Destroyable } from './Destroyable';
 import { Damage } from './Damage';
 import { lookupDamageCoefficiant } from './DamageCoefficiants';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class SimpleDestroyable implements Destroyable {
     private readonly _maxHp: number;

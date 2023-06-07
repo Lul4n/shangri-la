@@ -1,4 +1,4 @@
-import * as Utils from '../Utils';
+import * as Utils from '../../../ccc/Utils';
 
 export type DamageType = 'NONE' | 'PROJECTILE' | 'ENERGY' | 'EXPLOSIVE';
 const ALL: DamageType[] = ['NONE', 'PROJECTILE', 'ENERGY', 'EXPLOSIVE'];

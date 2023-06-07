@@ -3,7 +3,7 @@ import assert = require('assert');
 import { DamageType } from './DamageType';
 import { Weapon } from './Weapon';
 import { Damage } from './Damage';
-import { ToStringHelper } from '../ToStringHelper';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class SimpleWeapon implements Weapon {
     private readonly _damageValue: number;

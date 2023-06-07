@@ -1,8 +1,8 @@
 import { ResourceInventory } from './ResourceInventory';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
-import { ToStringHelper } from '../ToStringHelper';
 import assert = require('assert');
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class LimitedResourceInventory extends ResourceInventory {
     public static zero(): LimitedResourceInventory {

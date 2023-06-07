@@ -2,8 +2,8 @@ import { Ticks } from '../simulation/Ticks';
 import { ResourceProduction } from './ResourceProduction';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');
-import { ToStringHelper } from '../ToStringHelper';
 import { StructureBlueprint } from './StructureBlueprint';
+import { ToStringHelper } from '../../../ccc/ToStringHelper';
 
 export class Structure implements ResourceProduction {
     private _blueprint: StructureBlueprint;

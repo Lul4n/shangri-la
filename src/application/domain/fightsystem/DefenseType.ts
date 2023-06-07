@@ -1,4 +1,4 @@
-import * as Utils from '../Utils';
+import * as Utils from '../../../ccc/Utils';
 
 export type DefenseType = 'NONE' | 'PASSIVE' | 'ENERGY' | 'ACTIVE';
 const ALL: DefenseType[] = ['NONE', 'PASSIVE', 'ENERGY', 'ACTIVE'];
