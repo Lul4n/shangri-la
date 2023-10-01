@@ -1,48 +1,14 @@
 {
+  "name": "shangri-la",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
-    "init": "npm install",
-    "preclean": "npm run init",
-    "clean": "npx rimraf dist/",
-    "preformat": "npm run clean",
-    "format": "npx prettier --write src/**",
-    "prelint": "npm run format",
-    "lint": "npx eslint",
-    "pretest": "npm run lint",
-    "test": "npx jest",
-    "prebuild": "npm run test",
-    "build": "npx tsc -p tsconfig.build.json",
+    "clean": "docker compose down -v",
+    "prebuild": "npm run clean",
+    "build": "docker compose build",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc --watch\" \"npx nodemon -q dist/index.js\""
+    "start": "docker compose up"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "node-cron": "^3.0.2",
-    "pino": "8.11.0",
-    "pino-pretty": "9.4.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.18",
-    "@types/jest": "^29.5.0",
-    "@types/node": "^18.15.0",
-    "@types/node-cron": "^3.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "concurrently": "^8.0.1",
-    "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "jest": "^29.5.0",
-    "nodemon": "^2.0.22",
-    "prettier": "2.8.7",
-    "rimraf": "^4.4.1",
-    "ts-jest": "^29.1.0",
-    "ts-loader": "^9.4.4",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
-  }
+  "author": "Julian Stitz",
+  "license": "ISC"
 }

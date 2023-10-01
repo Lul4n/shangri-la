@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  server:
+    image: shangri-la-server
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      PORT: 8080
+      FRONTEND_PREFIX: /client
+      BACKEND_PREFIX: /api
