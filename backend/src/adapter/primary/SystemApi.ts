@@ -1,5 +1,5 @@
 import { Express, Request, Response } from 'express';
-import {loggerFactory} from "../../ccc/Logger";
+import { loggerFactory } from '../../ccc/Logger';
 export class SystemApi {
     private static readonly LOGGER = loggerFactory(SystemApi);
     public constructor(server: Express, urlPrefix: string) {

@@ -6,5 +6,6 @@ const config: Config.InitialOptions = {
     verbose: true,
     automock: false,
     collectCoverage: true,
+    rootDir: './'
 };
 export default config;

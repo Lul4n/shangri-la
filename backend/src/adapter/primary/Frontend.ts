@@ -1,6 +1,6 @@
-import express, { Express} from 'express';
-import path from "path";
-import {loggerFactory} from "../../ccc/Logger";
+import express, { Express } from 'express';
+import path from 'path';
+import { loggerFactory } from '../../ccc/Logger';
 export class Frontend {
     private static readonly LOGGER = loggerFactory(Frontend);
     public constructor(server: Express, urlPrefix: string, sourcePath: string) {
