@@ -3,15 +3,6 @@ import * as pino from 'pino';
 const transport = pino.transport({
     targets: [
         {
-            target: 'pino/file',
-            level: 'trace',
-            options: {
-                destination: `${__dirname}/../../dist/app.log`,
-                append: false,
-                mkdir: true,
-            },
-        },
-        {
             target: 'pino-pretty',
             level: 'info',
             options: {
