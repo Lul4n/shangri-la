@@ -2,7 +2,6 @@ import { UUID } from '../../ccc/UUID';
 import { Fleet } from '../../application/domain/fightsystem/Fleet';
 import { FleetRepository } from '../port/FleetRepository';
 import { loggerFactory } from '../../ccc/Logger';
-import {Battle} from "../../application/domain/fightsystem/Battle";
 
 export class InMemoryFleetRepository implements FleetRepository {
     private static readonly LOGGER = loggerFactory(InMemoryFleetRepository);

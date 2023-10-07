@@ -1,4 +1,4 @@
-import { exists, mapValues } from '../runtime{{importFileExtension}}';
+import { exists, mapValues, Writeable } from '../runtime{{importFileExtension}}';
 {{#hasImports}}
 {{#imports}}
 import type { {{{.}}} } from './{{.}}{{importFileExtension}}';
@@ -177,4 +177,26 @@ export function {{classname}}ToJSON(value?: {{classname}} | null): any {
     {{^hasVars}}
     return value;
     {{/hasVars}}
+}
+export class {{classname}}Builder{
+    private data : Partial<Writeable<{{classname}}>> = {};
+    {{#vars}}
+    public {{name}}(value? : {{{datatypeWithEnum}}} | null): {{classname}}Builder {
+        this.data.{{baseName}} = value === null ? undefined : value;
+        return this;
+    }
+    {{#isArray}}
+    public add2{{nameInCamelCase}}(value: {{{items.datatypeWithEnum}}}): {{classname}}Builder {
+        if(this.data.{{baseName}}) {
+            this.data.{{baseName}} = [...this.data.{{baseName}}, value];
+        }else{
+            this.data.{{baseName}} = [value];
+        }
+        return this;
+    }
+    {{/isArray}}
+    {{/vars}}
+    public build(): {{classname}} {
+        return {{classname}}FromJSON(this.data);
+    }
 }

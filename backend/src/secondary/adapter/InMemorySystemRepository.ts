@@ -2,7 +2,6 @@ import { System } from '../../application/domain/economysystem/System';
 import { loggerFactory } from '../../ccc/Logger';
 import { SystemRepository } from '../port/SystemRepository';
 import { UUID } from '../../ccc/UUID';
-import {Fleet} from "../../application/domain/fightsystem/Fleet";
 
 export class InMemorySystemRepository implements SystemRepository {
     private static readonly LOGGER = loggerFactory(InMemorySystemRepository);
