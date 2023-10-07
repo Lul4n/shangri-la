@@ -1,15 +1,18 @@
 import * as Utils from '../../../ccc/Utils';
 
 import { Fleet } from './Fleet';
-import { Simulatable } from '../simulation/Simulatable';
-import { Ticks } from '../simulation/Ticks';
-import { EveryXTicks } from '../simulation/EveryXTicks';
+import { Simulatable } from '../../simulation/Simulatable';
+import { Ticks } from '../../simulation/Ticks';
+import { EveryXTicks } from '../../simulation/EveryXTicks';
 import { loggerFactory } from '../../../ccc/Logger';
 import { ToStringHelper } from '../../../ccc/ToStringHelper';
+import { HasUuid } from '../HasUuid';
+import { UUID } from '../../../ccc/UUID';
+import { randomUUID } from '../../../ccc/Utils';
 
 export type BattleResult = 'OPEN' | 'ATTACKER_WON' | 'DEFENDER_WON' | 'DRAW';
 
-export class Battle implements Simulatable {
+export class Battle implements Simulatable, HasUuid {
     private static readonly LOGGER = loggerFactory(Battle);
     private readonly _everyXTicks: EveryXTicks;
     private readonly _attacker: Fleet;
@@ -17,6 +20,7 @@ export class Battle implements Simulatable {
     private readonly _maxRounds: number;
     private _round: number = 0;
     private _result: BattleResult;
+    private _uuid: UUID;
 
     constructor(attacker: Fleet, defender: Fleet, maxRounds: number) {
         this._everyXTicks = new EveryXTicks(10, () => this.calculateRound());
@@ -25,6 +29,11 @@ export class Battle implements Simulatable {
         this._maxRounds = maxRounds;
         this._round = 0;
         this._result = 'OPEN';
+        this._uuid = randomUUID();
+    }
+
+    public get uuid(): UUID {
+        return this._uuid;
     }
 
     public update(deltaTime: Ticks) {
@@ -68,7 +77,7 @@ export class Battle implements Simulatable {
         }
     }
     protected toStringHelper(): ToStringHelper {
-        return ToStringHelper.toStringHelper(this).add('round', this._round).add('maxRounds', this._maxRounds);
+        return ToStringHelper.toStringHelper(this).add('uuid', this._uuid).add('round', this._round).add('maxRounds', this._maxRounds);
     }
     public toString(): string {
         return this.toStringHelper().toString();

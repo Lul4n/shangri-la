@@ -1,4 +1,4 @@
-export type UUID = `${string}-${string}-${string}-${string}-${string}`;
+import { UUID } from '../../ccc/UUID';
 
 export interface HasUuid {
     get uuid(): UUID;

@@ -1,15 +1,15 @@
 import assert = require('assert');
 import { HasLabel } from '../HasLabel';
-import { Simulatable } from '../simulation/Simulatable';
-import { Ticks } from '../simulation/Ticks';
+import { Simulatable } from '../../simulation/Simulatable';
+import { Ticks } from '../../simulation/Ticks';
 import { HasResources } from './HasResources';
 import { LimitedResourceInventory } from './LimitedResourceInventory';
 import { ResourceAmount } from './ResourceAmount';
 import { Structure } from './Structure';
 import { StructureBlueprint } from './StructureBlueprint';
 import { loggerFactory } from '../../../ccc/Logger';
-import { UUID } from '../HasUuid';
 import { ToStringHelper } from '../../../ccc/ToStringHelper';
+import { UUID } from '../../../ccc/UUID';
 
 export type PlanetSize = number;
 2;

@@ -1,6 +1,5 @@
 {
   "scripts": {
-
     "init": "npm ci",
     "preclean": "npm run init",
     "clean": "npx rimraf dist/ && npx rimraf gen-src/openapi",
@@ -15,21 +14,24 @@
     "prebuild": "npm run test",
     "build": "npx tsc -p tsconfig.build.json",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc --watch\" \"npx nodemon -q dist/index.js\""
+    "start": "node dist/src/index.js",
+    "prewatch": "npm run build",
+    "watch": "concurrently \"npx tsc --watch\" \"npx nodemon -q dist/src/index.js\""
   },
   "dependencies": {
     "express": "^4.18.2",
     "node-cron": "^3.0.2",
     "pino": "8.11.0",
-    "pino-pretty": "9.4.0"
+    "pino-pretty": "9.4.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/express": "^4.17.18",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.0",
     "@types/node-cron": "^3.0.7",
+    "@types/uuid": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "concurrently": "^8.0.1",
@@ -46,8 +48,6 @@
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
-
-    "@openapitools/openapi-generator-cli": "^2.7.0"
+    "typescript": "^5.0.4"
   }
 }

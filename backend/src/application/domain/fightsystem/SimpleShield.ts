@@ -2,8 +2,8 @@ import assert = require('assert');
 import { DefenseType } from './DefenseType';
 import { Shield } from './Shield';
 import { SimpleDestroyable } from './SimpleDestroyable';
-import { Ticks } from '../simulation/Ticks';
-import { EveryXTicks } from '../simulation/EveryXTicks';
+import { Ticks } from '../../simulation/Ticks';
+import { EveryXTicks } from '../../simulation/EveryXTicks';
 import { loggerFactory } from '../../../ccc/Logger';
 import { ToStringHelper } from '../../../ccc/ToStringHelper';
 

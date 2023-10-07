@@ -1,7 +1,7 @@
 import assert = require('assert');
 import { Simulatable } from './Simulatable';
 import { Ticks } from './Ticks';
-import { ToStringHelper } from '../../../ccc/ToStringHelper';
+import { ToStringHelper } from '../../ccc/ToStringHelper';
 
 export class EveryXTicks implements Simulatable {
     private readonly _x: Ticks;

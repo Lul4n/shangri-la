@@ -42,7 +42,7 @@ export function cast{{classname}}(value: object): {{classname}} {
     if(guard{{classname}}(value)){
         return value;
     }else{
-        throw new Error("No {{classname}}: ${value}");
+        throw new Error(`No {{classname}}: ${value}`);
     }
 }
 

@@ -1,8 +1,8 @@
-import { UUID } from '../HasUuid';
-import { Ticks } from '../simulation/Ticks';
+import { Ticks } from '../../simulation/Ticks';
 import { ResourceAmount } from './ResourceAmount';
 import { testArcFurnaceProduction, testCoalMineProduction, testRefineryProduction, testSteelWorksProduction } from './ResourceAmount.test';
 import { StructureBlueprint } from './StructureBlueprint';
+import { UUID } from '../../../ccc/UUID';
 
 export const TEST_COAL_MINE_UUID: UUID = '8e1a4da2-c13b-4398-8513-484cc950f50e';
 export const TEST_STEEL_WORKS_UUID: UUID = '8f498865-d3d9-4fee-9a99-f7a3de5eed44';

@@ -1,4 +1,4 @@
-import { Ticks } from '../simulation/Ticks';
+import { Ticks } from '../../simulation/Ticks';
 import { ResourceProduction } from './ResourceProduction';
 import { ResourceAmount } from './ResourceAmount';
 import assert = require('assert');

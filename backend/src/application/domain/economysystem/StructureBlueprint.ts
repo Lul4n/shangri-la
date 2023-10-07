@@ -1,10 +1,11 @@
 import { assert } from 'console';
 import { HasLabel } from '../HasLabel';
-import { HasUuid, UUID } from '../HasUuid';
+import { HasUuid } from '../HasUuid';
 import { ToStringHelper } from '../../../ccc/ToStringHelper';
-import { Ticks } from '../simulation/Ticks';
+import { Ticks } from '../../simulation/Ticks';
 import { HasResources } from './HasResources';
 import { ResourceAmount } from './ResourceAmount';
+import { UUID } from '../../../ccc/UUID';
 
 export class StructureBlueprint implements HasLabel, HasUuid {
     private readonly _uuid: UUID;

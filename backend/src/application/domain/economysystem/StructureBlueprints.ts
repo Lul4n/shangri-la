@@ -1,7 +1,7 @@
-import { UUID } from '../HasUuid';
-import { Ticks } from '../simulation/Ticks';
+import { Ticks } from '../../simulation/Ticks';
 import { ResourceAmount } from './ResourceAmount';
 import { StructureBlueprint } from './StructureBlueprint';
+import { UUID } from '../../../ccc/UUID';
 
 export const UUID_COAL_MINE: UUID = '9883db39-7a5b-41b6-bd63-4a85bf23bba6';
 export const UUID_STEEL_WORKS: UUID = 'd35b95ad-eab2-44c9-9cca-3017be334eb1';
