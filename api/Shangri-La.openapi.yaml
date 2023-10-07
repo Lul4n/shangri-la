@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Shangri-La
+  description: Shangri-La
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api/'
+tags:
+  - name: System
+  - name: Planet
+paths:
+  /systems:
+    get:
+      tags:
+        - System
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Systems'
+  /systems/{systemID}:
+    get:
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/SystemIdPathParam'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemDetails'
+  /systems/{systemID}/planets:
+    get:
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/SystemIdPathParam'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Planets'
+  /planets/{planetID}:
+    get:
+      tags:
+        - Planet
+      parameters:
+        - $ref: '#/components/parameters/PlanetIdPathParam'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanetDetails'
+components:
+  parameters:
+    SystemIdPathParam:
+      name: systemID
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/SystemID'
+    PlanetIdPathParam:
+      name: planetID
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/PlanetID'
+  schemas:
+    SystemID:
+      type: string
+      format: uuid
+      readOnly: true
+      example: c1721abb-3e72-4afd-aa8d-123a9c31e50a
+    PlanetID:
+      type: string
+      format: uuid
+      readOnly: true
+      example: 19f8f552-cdcb-4721-83c0-24983425428a
+    System:
+      type: object
+      required:
+        - id
+        - label
+        - planets
+      properties:
+        id:
+          $ref: '#/components/schemas/SystemID'
+        label:
+          type: string
+          example: Solarsystem
+    Systems:
+      type: array
+      items:
+        $ref: '#/components/schemas/System'
+    SystemDetails:
+      allOf:
+        - $ref: '#/components/schemas/System'
+        - type: object
+          required:
+            - planets
+          properties:
+            planets:
+              type: array
+              items:
+                $ref: '#/components/schemas/Planet'
+    Planet:
+      type: object
+      required:
+        - id
+        - label
+      properties:
+        id:
+          $ref: '#/components/schemas/PlanetID'
+        label:
+          type: string
+          example: Earth
+    Planets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Planet'
+    PlanetDetails:
+      allOf:
+        - $ref: '#/components/schemas/Planet'
+        - type: object
+          required:
+            - inventory
+          properties:
+            inventory:
+              $ref: '#/components/schemas/LimitedResourceInventory'
+    ResourceInventory:
+      type: object
+      required:
+        - carbon
+        - metal
+        - silicon
+        - synthetics
+        - propellant
+      properties:
+        carbon:
+          type: number
+        metal:
+          type: number
+        silicon:
+          type: number
+        synthetics:
+          type: number
+        propellant:
+          type: number
+    LimitedResourceInventory:
+      allOf:
+        - $ref: '#/components/schemas/ResourceInventory'
+        - type: object
+          required:
+            - limits
+          properties:
+            limits:
+              $ref: '#/components/schemas/ResourceInventory'

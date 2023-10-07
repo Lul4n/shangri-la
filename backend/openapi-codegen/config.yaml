@@ -1,0 +1,6 @@
+templateDir: openapi-codegen/templates
+files:
+  models.index.mustache:
+    folder: models
+    destinationFilename: index.ts
+    templateType: SupportingFiles

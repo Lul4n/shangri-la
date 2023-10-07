@@ -1,9 +1,12 @@
 {
   "scripts": {
+
     "init": "npm ci",
     "preclean": "npm run init",
-    "clean": "npx rimraf dist/",
-    "preformat": "npm run clean",
+    "clean": "npx rimraf dist/ && npx rimraf gen-src/openapi",
+    "pregenerate": "npm run clean",
+    "generate": "npx @openapitools/openapi-generator-cli generate --global-property models,supportingFiles -i ../api/Shangri-La.openapi.yaml -g typescript-fetch -c openapi-codegen/config.yaml -o gen-src/openapi",
+    "preformat": "npm run generate",
     "format": "npx prettier --write src/**",
     "prelint": "npm run format",
     "lint": "npx eslint",
@@ -43,6 +46,8 @@
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+
+    "@openapitools/openapi-generator-cli": "^2.7.0"
   }
 }

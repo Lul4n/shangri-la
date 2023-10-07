@@ -9,6 +9,5 @@
     "prestart": "npm run build",
     "start": "docker compose up"
   },
-  "author": "Julian Stitz",
-  "license": "ISC"
+  "author": "Julian Stitz"
 }
