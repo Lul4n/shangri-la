@@ -1,4 +1,4 @@
-import express, {Express, NextFunction, Request, Response} from 'express';
+import express, { Express, NextFunction, Request, Response } from 'express';
 import { loggerFactory } from './ccc/Logger';
 import { SimulationService } from './application/simulation/SimulationService';
 import { devSetup } from './ccc/dev_setup';
@@ -14,7 +14,7 @@ import { SystemRepository } from './secondary/port/SystemRepository';
 import { SystemService } from './application/SystemService';
 import { FleetService } from './application/FleetService';
 import { BattleService } from './application/BattleService';
-import {ErrorResponseController} from "./primary/adapter/ErrorResponseController";
+import { ErrorResponseController } from './primary/adapter/ErrorResponseController';
 
 const LOGGER = loggerFactory('INDEX');
 

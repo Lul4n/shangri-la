@@ -1,14 +1,14 @@
-import {Writeable} from "./Utils";
+import { Writeable } from './Utils';
 
 export type ErrorCode = 'SYSTEM_NOT_FOUND' | 'INVALID_SYSTEM_ID' | 'UNKNOWN';
 
-export interface ErrorResponse{
+export interface ErrorResponse {
     get title(): string | null;
     get message(): string | null;
     get code(): ErrorCode;
     get status(): number;
 }
-export class ErrorResponseExceptionBuilder{
+export class ErrorResponseExceptionBuilder {
     private data: Partial<Writeable<ErrorResponse>> = {};
 
     public title(title: string): ErrorResponseExceptionBuilder {
@@ -27,13 +27,13 @@ export class ErrorResponseExceptionBuilder{
         this.data.status = status;
         return this;
     }
-    public build(): ErrorResponseException{
+    public build(): ErrorResponseException {
         return new ErrorResponseException(this.data);
     }
 }
 
-export class ErrorResponseException extends Error implements ErrorResponse{
-    public static builder(): ErrorResponseExceptionBuilder{
+export class ErrorResponseException extends Error implements ErrorResponse {
+    public static builder(): ErrorResponseExceptionBuilder {
         return new ErrorResponseExceptionBuilder();
     }
 
@@ -59,5 +59,4 @@ export class ErrorResponseException extends Error implements ErrorResponse{
     get title(): string | null {
         return this._title;
     }
-
 }

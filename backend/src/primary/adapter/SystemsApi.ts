@@ -4,8 +4,8 @@ import { SystemPort } from '../port/SystemPort';
 import { PlanetBuilder, System, SystemBuilder, SystemDetails, SystemDetailsBuilder } from '../../../gen-src/openapi';
 import { UUID } from '../../ccc/UUID';
 import { parseUUID } from '../../ccc/Utils';
-import {ErrorResponseException} from "../../ccc/ErrorResponseException";
-export class SystemsApi{
+import { ErrorResponseException } from '../../ccc/ErrorResponseException';
+export class SystemsApi {
     private static readonly LOGGER = loggerFactory(SystemsApi);
     private port: SystemPort;
     public constructor(server: Express, urlPrefix: string, port: SystemPort) {
@@ -23,7 +23,7 @@ export class SystemsApi{
             if (system) {
                 res.send(system);
             } else {
-                throw ErrorResponseException.builder().status(404).code('SYSTEM_NOT_FOUND').message("System not found").build();
+                throw ErrorResponseException.builder().status(404).code('SYSTEM_NOT_FOUND').message('System not found').build();
             }
         });
         SystemsApi.LOGGER.info('serving system api at %s/systems', urlPrefix);
