@@ -3,6 +3,7 @@ import { SystemPort } from '../primary/port/SystemPort';
 import { System } from './domain/economysystem/System';
 import { Simulatable } from './simulation/Simulatable';
 import { Ticks } from './simulation/Ticks';
+import { UUID } from '../ccc/UUID';
 
 export class SystemService implements SystemPort, Simulatable {
     private systemRepository: SystemRepository;
@@ -21,5 +22,9 @@ export class SystemService implements SystemPort, Simulatable {
 
     public all(): System[] {
         return this.systemRepository.all();
+    }
+
+    public find(systemId: UUID): System | null {
+        return this.systemRepository.find(systemId);
     }
 }

@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, {Express, NextFunction, Request, Response} from 'express';
 import { loggerFactory } from './ccc/Logger';
 import { SimulationService } from './application/simulation/SimulationService';
 import { devSetup } from './ccc/dev_setup';
@@ -14,6 +14,7 @@ import { SystemRepository } from './secondary/port/SystemRepository';
 import { SystemService } from './application/SystemService';
 import { FleetService } from './application/FleetService';
 import { BattleService } from './application/BattleService';
+import {ErrorResponseController} from "./primary/adapter/ErrorResponseController";
 
 const LOGGER = loggerFactory('INDEX');
 
@@ -40,8 +41,10 @@ const frontendUrlPrefix = process.env['FRONTEND_PREFIX'] || '/frontend';
 const backendUrlPrefix = process.env['BACKEND_PREFIX'] || '/backend';
 const frontendPath: string = process.env['FRONTEND_PATH'] || path.resolve(__dirname, '../../frontend/build/');
 server.use(express.static(path.resolve(__dirname, '../client/build')));
+
 new SystemsApi(server, backendUrlPrefix, systemService);
 new Frontend(server, frontendUrlPrefix, frontendPath);
+new ErrorResponseController(server);
 server.listen(port, () => {
     LOGGER.info('Server is running at http://localhost:%s', port);
 });

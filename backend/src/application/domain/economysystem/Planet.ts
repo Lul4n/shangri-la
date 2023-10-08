@@ -10,6 +10,8 @@ import { StructureBlueprint } from './StructureBlueprint';
 import { loggerFactory } from '../../../ccc/Logger';
 import { ToStringHelper } from '../../../ccc/ToStringHelper';
 import { UUID } from '../../../ccc/UUID';
+import { HasUuid } from '../HasUuid';
+import { randomUUID } from '../../../ccc/Utils';
 
 export type PlanetSize = number;
 2;
@@ -21,19 +23,25 @@ interface Construction {
     level: number;
 }
 
-export class Planet implements Simulatable, HasLabel {
+export class Planet implements Simulatable, HasLabel, HasUuid {
     private static readonly LOGGER = loggerFactory(Planet);
     private readonly _structuresByBlueprintUuid: Record<UUID, Structure> = {};
     private readonly _structureConstructionQueue: Construction[] = [];
     private readonly _resources: LimitedResourceInventory;
     private _label: string | null;
     private _size: PlanetSize;
+    private _uuid: UUID;
 
     constructor(size: PlanetSize, label?: string) {
         assert(size >= 0);
         this._size = size;
         this._resources = LimitedResourceInventory.ofCapacity(size);
         this._label = label ? label : null;
+        this._uuid = randomUUID();
+    }
+
+    public get uuid(): UUID {
+        return this._uuid;
     }
 
     public get size(): PlanetSize {

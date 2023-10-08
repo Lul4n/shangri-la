@@ -42,6 +42,10 @@ export class System implements Simulatable, HasLabel, HasUuid {
         return this._coordinates;
     }
 
+    public get planets(): Planet[] {
+        return this._planets;
+    }
+
     public addPlanet(planet: Planet) {
         this._planets.push(planet);
     }

@@ -30,12 +30,15 @@ export function devSetup(systemRepository: SystemRepository, fleetRepository: Fl
     battleRepository.save(battle);
 
     const s1 = new System(ORIGIN, 'Sonnensystem');
+
+    const p0 = new Planet(100, 'Mars');
+    s1.addPlanet(p0);
     const p1 = new Planet(100, 'Erde');
+    s1.addPlanet(p1);
     p1.build(new Structure(BLUEPRINT_COAL_MINE));
     p1.build(new Structure(BLUEPRINT_STEEL_WORKS));
     p1.build(new Structure(BLUEPRINT_ARC_FURNACE));
     p1.build(new Structure(BLUEPRINT_REFINERY));
 
-    s1.addPlanet(p1);
     systemRepository.save(s1);
 }
