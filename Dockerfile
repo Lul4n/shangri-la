@@ -34,7 +34,7 @@ ENV BACKEND_PATH $SHANGRILA_PATH/backend
 WORKDIR $SHANGRILA_PATH
 
 COPY --from=BACKEND_BUILDER /shangri-la/backend/dist $BACKEND_PATH
-COPY --from=FRONTEND_BUILDER /shangri-la/frontend/build $FRONTEND_PATH
+COPY --from=FRONTEND_BUILDER /shangri-la/frontend/dist $FRONTEND_PATH
 
 ENV PORT 80
 ENV FRONTEND_PREFIX /frontend ## needs also to be adjusted in the frontend package.json
