@@ -6,10 +6,10 @@ export const shangriLaTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: amber[800]
+            main: cyan[500],
         },
         secondary: {
-            main: cyan[300],
+            main: amber[800]
         }
     },
 }, deDE);

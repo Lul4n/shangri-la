@@ -16,7 +16,7 @@ i18next
             escapeValue: false
         },
         backend:{
-            loadPath: '/locales/{{lng}}/{{ns}}.json'
+            loadPath: '/frontend/locales/{{lng}}/{{ns}}.json'
         },
         detection:{
             order: ['querystring','localStorage', 'navigator'],
