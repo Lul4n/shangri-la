@@ -1,0 +1,35 @@
+{
+  "title": {
+    "short": "Shangri-La",
+    "long": "Shangri-La - Der zweite Sonnenaufgang"
+  },
+  "navigation": {
+    "welcome": "Willkommen",
+    "createAccount": "Registrieren",
+    "login": "Login"
+  },
+  "views": {
+    "welcome": {
+      "title": "Willkommen an Bord!",
+      "introduction": "Als mutiger Entdecker und Pionier ist es Ihre Aufgabe, unbekannte Sternensysteme zu durchstreifen, verborgene Geheimnisse aufzudecken und neue Welten zu besiedeln. Werden Sie der Architekt einer neuen Zivilisation sein, die im Einklang mit den Sternen lebt? Das Schicksal von Shangri-La liegt in Ihren Händen. Das Abenteuer beginnt jetzt!"
+    },
+    "createAccount": {
+      "title": "Registrieren",
+      "form": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "password_repetition": "Passwort wiederholen",
+        "submit": "Neues Konto erstellen"
+      }
+    },
+    "login": {
+      "title": "Anmeldung",
+      "form": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "rememberMe": "Angemeldet bleiben",
+        "submit": "Anmelden"
+      }
+    }
+  }
+}

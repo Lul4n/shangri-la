@@ -1,25 +1,16 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import {createTheme, ThemeProvider} from "@mui/material";
-import { amber, cyan} from "@mui/material/colors";
-import { deDE } from '@mui/material/locale';
+import {ThemeProvider} from "@mui/material";
+import './I18N';
+import {shangriLaTheme} from "./Theme.ts";
 
-const theme = createTheme({
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: amber[600]
-        },
-        secondary: {
-            main: cyan[100],
-        }
-    },
-}, deDE);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <App />
+      <ThemeProvider theme={shangriLaTheme}>
+          <Suspense fallback={<div>Loading...</div>}>
+              <App />
+          </Suspense>
       </ThemeProvider>
   </React.StrictMode>,
 )

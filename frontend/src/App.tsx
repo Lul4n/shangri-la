@@ -1,55 +1,105 @@
-import {BrowserRouter as Router} from 'react-router-dom'
-import {AppBar, Container, CssBaseline, Grid, Toolbar, Typography, Button} from "@mui/material";
-import {RocketLaunchTwoTone as RocketLaunchTwoToneIcon} from "@mui/icons-material";
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
+import {
+  AppBar,
+  Box,
+  Container,
+  CssBaseline,
+  IconButton,
+  styled,
+  Toolbar,
+  Typography
+} from "@mui/material";
+import MuiDrawer from '@mui/material/Drawer';
+import {
+  Menu as MenuIcon,
+  MenuOpen as MenuOpenIcon
+} from "@mui/icons-material";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import {SxContainer} from "./Styles.tsx";
+import {useTranslation} from "react-i18next";
+import Welcome from "./Welcome.tsx";
+import Login from "./Login.tsx";
+import React from "react";
+import Navigation from "./Navigation.tsx";
+import CreateAccount from "./CreateAccount.tsx";
 
 
+const drawerWidth: number = 240;
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+      '& .MuiDrawer-paper': {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+          overflowX: 'hidden',
+          transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          width: theme.spacing(7),
+          [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(7),
+          },
+        }),
+      },
+    }),
+);
 
 function App() {
+  const {t} = useTranslation();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
   return (
-    <Router>
-      <>
+    <BrowserRouter basename="/frontend/">
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <header>
-          <AppBar position="relative">
-            <nav>
-              <Toolbar>
-                <RocketLaunchTwoToneIcon />
-                <Typography variant="h5">Shangri-La - The second Sunrise</Typography>
-              </Toolbar>
-            </nav>
-          </AppBar>
-        </header>
-        <main>
-          <div>
-            <Container maxWidth="md" sx={SxContainer}>
-              <Typography variant="h2" align="center" color="textPrimary" gutterBottom>Welcome!</Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Als mutiger Entdecker und Pionier ist es Ihre Aufgabe, unbekannte Sternensysteme zu durchstreifen, verborgene Geheimnisse aufzudecken und neue Welten zu besiedeln.
-
-                Werden Sie der Architekt einer neuen Zivilisation sein, die im Einklang mit den Sternen lebt? Das Schicksal von Shangri-La liegt in Ihren Händen.
-
-                Das Abenteuer beginnt jetzt!
-              </Typography>
-              <div>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item>
-                    <Button variant="contained" color="primary">Create Account</Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" color="secondary">Login</Button>
-                  </Grid>
-                </Grid>
-              </div>
-            </Container>
-          </div>
-        </main>
-      </>
-    </Router>
+        <AppBar position="absolute">
+          <Toolbar>
+            <IconButton size="large" edge="start" onClick={toggleMenu} sx={{mr:3}}>
+              <MenuIcon sx={{...(menuOpen && { display: 'none' })}} />
+              <MenuOpenIcon sx={{display:'none',...(menuOpen && { display: 'block' })}} />
+            </IconButton>
+            <Typography variant="h5" sx={{display: {xs: 'none', md: 'block'}}} >{t('title.long')}</Typography>
+            <Typography variant="h5" sx={{display: { xs: 'block', md: 'none'}}} >{t('title.short')}</Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={menuOpen} sx={{height: '100vh', zIndex: 0}}>
+          <Toolbar />
+          <Navigation />
+        </Drawer>
+        <Box
+            component="main"
+            sx={{
+              backgroundColor: (theme) =>
+                  theme.palette.mode === 'light'
+                      ? theme.palette.grey[100]
+                      : theme.palette.grey[900],
+              flexGrow: 1,
+              height: '100vh',
+              overflow: 'auto',
+            }}
+        >
+          <Container sx={{ mt: 14, mb: 4 }}>
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Container>
+        </Box>
+      </Box>
+    </BrowserRouter>
   )
 }
 

@@ -1,0 +1,35 @@
+{
+  "title": {
+    "short": "Shangri-La",
+    "long": "Shangri-La - The second Sunrise"
+  },
+  "navigation": {
+    "welcome": "Welcome",
+    "createAccount": "Create Account",
+    "login": "Login"
+  },
+  "views": {
+    "welcome": {
+      "title": "Welcome on board!",
+      "introduction": "As a brave explorer and pioneer, it is your task to traverse unknown star systems, uncover hidden secrets, and colonize new worlds. Will you be the architect of a new civilization that lives in harmony with the stars? The fate of Shangri-La rests in your hands. The adventure begins now!"
+    },
+    "createAccount": {
+      "title": "Create Account",
+      "form": {
+        "email": "E-Mail",
+        "password": "Password",
+        "password_repetition": "Repeat Password",
+        "submit": "Create new Account"
+      }
+    },
+    "login": {
+      "title": "Login",
+      "form": {
+        "email": "E-Mail",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "submit": "Login"
+      }
+    }
+  }
+}
