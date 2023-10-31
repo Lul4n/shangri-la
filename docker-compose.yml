@@ -22,18 +22,12 @@ services:
     restart: unless-stopped
     build:
       context: keycloak
-    command:
-      - 'start'
-      - '--optimized'
-      - '--hostname-port=8081'
-      - '--import-realm'
+    command: [ 'start', '--optimized', '--hostname-port=8081', '--import-realm' ]
     ports:
       - 8081:8443
     env_file:
       - .env
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB_URL: jdbc:postgresql://database:5432/$POSTGRES_KEYCLOAK_DB
       KC_DB_USERNAME: $POSTGRES_KEYCLOAK_USER
       KC_DB_PASSWORD: $POSTGRES_KEYCLOAK_PASSWORD
@@ -46,22 +40,24 @@ services:
       interval: 5s
       retries: 20
   database:
-    image: shangri-la-database
+    image: postgres:alpine
     restart: unless-stopped
     volumes:
       - pg_data:/var/lib/postgresql/data/
+    ports:
+      - 8082:5432
     healthcheck:
-      test: pg_isready -U $POSTGRES_USER -d postgres && pg_isready -U $POSTGRES_USER -d keycloak
+      test: pg_isready -U $POSTGRES_USER -d postgres && pg_isready -U $POSTGRES_USER -d $POSTGRES_KEYCLOAK_DB && pg_isready -U $POSTGRES_USER -d keycloak
       start_period: 60s
       interval: 5s
       retries: 20
     env_file:
       - .env
     configs:
-      - source: init-keycloak-db
-        target: /docker-entrypoint-initdb.d/init-keycloak-db.sh
+      - source: init-additional-dbs
+        target: /docker-entrypoint-initdb.d/init-additional-dbs.sh
 configs:
-  init-keycloak-db:
-    file: ./init-keycloak-db.sh
+  init-additional-dbs:
+    file: init-additional-dbs.sh
 volumes:
   pg_data:
