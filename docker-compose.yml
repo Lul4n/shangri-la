@@ -10,3 +10,58 @@ services:
       PORT: 8080
       FRONTEND_PREFIX: /frontend # needs also to be adjusted in the frontend package.json
       BACKEND_PREFIX: /api
+    env_file:
+      - .env
+    depends_on:
+      database:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+  keycloak:
+    image: shangri-la-keycloak
+    restart: unless-stopped
+    build:
+      context: keycloak
+    command:
+      - 'start'
+      - '--optimized'
+      - '--hostname-port=8081'
+      - '--import-realm'
+    ports:
+      - 8081:8443
+    env_file:
+      - .env
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB_URL: jdbc:postgresql://database:5432/$POSTGRES_KEYCLOAK_DB
+      KC_DB_USERNAME: $POSTGRES_KEYCLOAK_USER
+      KC_DB_PASSWORD: $POSTGRES_KEYCLOAK_PASSWORD
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: curl --head -fsSk https://localhost:8443/health/ready
+      start_period: 60s
+      interval: 5s
+      retries: 20
+  database:
+    image: shangri-la-database
+    restart: unless-stopped
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: pg_isready -U $POSTGRES_USER -d postgres && pg_isready -U $POSTGRES_USER -d keycloak
+      start_period: 60s
+      interval: 5s
+      retries: 20
+    env_file:
+      - .env
+    configs:
+      - source: init-keycloak-db
+        target: /docker-entrypoint-initdb.d/init-keycloak-db.sh
+configs:
+  init-keycloak-db:
+    file: ./init-keycloak-db.sh
+volumes:
+  pg_data:
