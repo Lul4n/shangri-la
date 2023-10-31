@@ -7,7 +7,11 @@
     "prebuild": "npm run clean",
     "build": "docker compose build",
     "prestart": "npm run build",
-    "start": "docker compose up"
+    "start": "docker compose up",
+
+    "keycloak:export-realm": "docker exec shangri-la-keycloak-1 /opt/keycloak/bin/kc.sh export --file /tmp/shangri-la.json --realm shangri-la",
+    "prekeycloak:copy-realm": "npm run keycloak:export-realm",
+    "keycloak:copy-realm": "docker cp shangri-la-keycloak-1:/tmp/shangri-la.json keycloak/shangri-la.json"
   },
   "author": "Julian Stitz"
 }
