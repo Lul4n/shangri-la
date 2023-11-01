@@ -27,7 +27,6 @@
       "form": {
         "email": "E-Mail",
         "password": "Password",
-        "rememberMe": "Remember me",
         "submit": "Login"
       }
     }

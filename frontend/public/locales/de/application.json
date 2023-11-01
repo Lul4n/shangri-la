@@ -27,7 +27,6 @@
       "form": {
         "email": "E-Mail",
         "password": "Passwort",
-        "rememberMe": "Angemeldet bleiben",
         "submit": "Anmelden"
       }
     }
