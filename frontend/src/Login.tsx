@@ -8,9 +8,42 @@ import {
     Container, Typography
 } from "@mui/material";
 import {useTranslation} from "react-i18next";
+import {useAuth} from "react-oidc-context";
 
 
-export default function Login() {
+export default function Login(){
+    const auth = useAuth();
+    console.log(auth);
+    switch (auth.activeNavigator) {
+        case "signinSilent":
+            return <div>Signing you in...</div>;
+        case "signoutRedirect":
+            return <div>Signing you out...</div>;
+    }
+
+
+    if (auth.isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (auth.error) {
+        console.log(auth.error);
+        return <div>Oops... {auth.error.message}</div>;
+    }
+
+    if (auth.isAuthenticated) {
+        return (
+            <div>
+                Hello {auth.user?.profile.sub}{" "}
+                <button onClick={() => void auth.removeUser()}>Log out</button>
+            </div>
+        );
+    }
+
+    return <button onClick={() => void auth.signinRedirect()}>Log in</button>;
+}
+
+export function Login2() {
     const {t} = useTranslation();
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

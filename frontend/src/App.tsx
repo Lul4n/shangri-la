@@ -3,7 +3,6 @@ import {
   AppBar,
   Box,
   Container,
-  CssBaseline,
   IconButton,
   styled,
   Toolbar,
@@ -62,7 +61,6 @@ function App() {
   return (
     <BrowserRouter basename="/frontend/">
       <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
         <AppBar position="absolute">
           <Toolbar>
             <IconButton size="large" edge="start" onClick={toggleMenu} sx={{mr:3}}>
